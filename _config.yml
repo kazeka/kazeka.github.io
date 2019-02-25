@@ -6,8 +6,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 
 # User settings
 username: Alexander Kazeka
-user_description: "Independent contractor: data analysis, visualization, machine learning, computer vision, NLP, and deep neural networks"
-user_title: Machine Learning Engineer
+user_description: "Data analysis, visualization, machine learning, computer vision, NLP, and deep neural networks. I analyze data and make machine learning models, then put them together in production software."
+user_title: Machine Learning Software Engineer
 email: alexander.kazeka@gmail.com
 # twitter_username: lorem_ipsum
 github_username:  kazeka
