@@ -1,12 +1,12 @@
 # Site settings
-title: "Alexander Kazeka. Machine learning engineer: computer vision, NLP, deep neural networks"
-description: Alexander Kazeka, data science, data visualization, machine learning, computer vision, natural laguage processing, NLP, deep learning, deep neural networks, deep convolutional networks, LSTM, autoencoder, word vectors, word2vec, Python
+title: "Alex Kazeka. Alexander Kazeka. Machine learning engineer: computer vision, NLP, deep neural networks, LLM, stable diffusion, UAV, SLAM"
+description: Alex Kazeka, Alexander Kazeka, machine learning, computer vision, natural laguage processing, NLP, deep learning, LLM, stable diffusion, VAE, SLAM, deep neural networks, deep convolutional networks, embeddings, Python, data science, visualization
 baseurl: "" # the subpath of your site, e.g. /blog
 # url: "localhost:3000" # the base hostname & protocol for your site e.g. http://willianjusten.com.br
 
 # User settings
-username: Alexander Kazeka
-user_description: "Data analysis, visualization, machine learning, computer vision, NLP, and deep neural networks. I analyze data and make machine learning models, then put them together in production software."
+username: Alex Kazeka
+user_description: "Machine learning, computer vision, NLP, and deep neural networks. I available information and make machine learning models, then put them together in production software."
 user_title: Machine Learning Software Engineer
 email: alexander.kazeka@gmail.com
 # twitter_username: lorem_ipsum
