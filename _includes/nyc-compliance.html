@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NYC Building Compliance Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1a1a2e;--navy2:#16213e;--ink:#1a1a2e;--red:#c8102e;--bg:#f8f9fa;--line:#e5e7eb;--muted:#6b7280;
+  --ok:#15803d;--okbg:#dcfce7;--warn:#b45309;--warnbg:#fef3c7;--bad:#b91c1c;--badbg:#fee2e2;--info:#1d4ed8;--infobg:#dbeafe}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+nav{background:#fff;border-bottom:1px solid var(--line);padding:14px 32px;display:flex;align-items:center;gap:24px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}.logo span{color:var(--red)}
+nav .sp{flex:1}
+.btn{background:var(--red);color:#fff;border:0;border-radius:8px;padding:12px 22px;font:600 15px Inter,sans-serif;cursor:pointer}
+.btn:disabled{opacity:.6;cursor:wait}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:56px 32px 64px}
+.hero h1{font-size:34px;font-weight:800;margin:0 0 10px;max-width:760px;line-height:1.2}
+.hero p{opacity:.85;max-width:680px;margin:0 0 28px}
+.search{display:flex;gap:10px;max-width:720px;background:#fff;padding:8px;border-radius:12px}
+.search input{flex:1;border:0;font:16px Inter,sans-serif;padding:10px 12px;outline:none;color:var(--ink)}
+.hint{font-size:13px;opacity:.7;margin-top:10px}
+.hint a{color:#fff;cursor:pointer;text-decoration:underline}
+main{max-width:1180px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:22px}
+h2{font-size:22px;font-weight:800;margin:0 0 4px}
+h3{font-size:17px;font-weight:800;margin:0 0 14px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:16px}
+.fact{background:var(--bg);border-radius:8px;padding:12px}
+.fact b{display:block;font-size:18px}.fact small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;border-top:4px solid var(--navy2)}
+.kpi.bad{border-top-color:var(--red)}.kpi.warn{border-top-color:#f59e0b}.kpi.ok{border-top-color:#16a34a}
+.kpi b{font-size:30px;font-weight:800;display:block;line-height:1.1}.kpi span{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);border-bottom:2px solid var(--line);padding:8px}
+td{border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.c-ok{background:var(--okbg);color:var(--ok)}.c-warn{background:var(--warnbg);color:var(--warn)}
+.c-bad{background:var(--badbg);color:var(--bad)}.c-info{background:var(--infobg);color:var(--info)}.c-na{background:#f3f4f6;color:var(--muted)}
+.law{font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.scroll{max-height:460px;overflow:auto}
+.err{background:var(--badbg);color:var(--bad);padding:14px 18px;border-radius:10px}
+.spin{display:inline-block;width:18px;height:18px;border:3px solid #fff5;border-top-color:#fff;border-radius:50%;animation:s 1s linear infinite;vertical-align:-4px}
+@keyframes s{to{transform:rotate(360deg)}}
+.src{font-size:12px;color:var(--muted)}
+.src a{color:var(--muted)}
+footer{background:#0f0f1a;color:#9ca3af;padding:28px 32px;font-size:13px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<nav><div class="logo">Compli<span>Check</span> NYC</div><div class="sp"></div><a class="btn" href="#" onclick="window.print();return false">Print report</a></nav>
+
+<section class="hero">
+  <h1>NYC Building Compliance Check</h1>
+  <p>Enter any New York City address to see its required inspections and filing deadlines (FISP, LL87, LL152, LL84/97, elevators, boilers) and its open violations, pulled live from NYC Open Data.</p>
+  <form class="search" id="f">
+    <input id="q" placeholder="e.g. 350 5th Ave, Manhattan" autocomplete="off">
+    <button class="btn" id="go">Check building</button>
+  </form>
+  <div class="hint">Try: <a data-a="350 5th Ave, Manhattan">Empire State Building</a> · <a data-a="1 Centre St, Manhattan">1 Centre St</a> · <a data-a="2 Metrotech Center, Brooklyn">2 MetroTech</a></div>
+</section>
+
+<main id="out"></main>
+
+<footer>Data: NYC DOB, HPD, DOB NOW, DCP PLUTO and LL84 datasets via NYC Open Data, plus NYC Planning GeoSearch. Rules are simplified. Check deadlines against official DOB/HPD sources before you act on them.</footer>
+
+<script>
+const SODA = "https://data.cityofnewyork.us/resource/";
+const DS = {
+  pluto:"64uk-42ks", elevators:"e5aq-a4j2", dobViol:"3h2n-5cm9", ecb:"6bgk-3dad", safety:"855j-jady",
+  hpd:"wvxf-dwi5", complaints:"eabe-havv", boiler:"52dp-yji6", fisp:"xubg-57si", ll84:"5zyy-y8am"
+};
+const NOW = new Date(), YEAR = NOW.getFullYear();
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = v => v == null || v === "" ? null : Number(v);
+const fmt = n => n == null || isNaN(n) ? "—" : Number(n).toLocaleString("en-US");
+const money = n => n == null ? "—" : "$" + fmt(Math.round(n));
+const d = s => { if (!s) return null; if (/^\d{8}$/.test(s)) s = s.slice(0,4)+"-"+s.slice(4,6)+"-"+s.slice(6); const x = new Date(s); return isNaN(x) ? null : x; };
+const ds = s => { const x = d(s); return x ? x.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"}) : "—"; };
+const chip = (cls, t) => `<span class="chip c-${cls}">${esc(t)}</span>`;
+
+async function soda(id, params) {
+  const u = SODA + id + ".json?" + new URLSearchParams(params);
+  try { const r = await fetch(u); if (!r.ok) throw new Error(r.status); return await r.json(); }
+  catch (e) { console.warn(id, e); return null; }   // null = source unavailable
+}
+
+async function geocode(text) {
+  const r = await fetch("https://geosearch.planninglabs.nyc/v2/search?size=1&text=" + encodeURIComponent(text));
+  const j = await r.json(); const f = j.features && j.features[0];
+  if (!f || !f.properties.addendum?.pad) throw new Error("Address not found in NYC. Include the borough, e.g. \"350 5th Ave, Manhattan\".");
+  const p = f.properties;
+  return { label: p.label, borough: p.borough, zip: p.postalcode, bbl: p.addendum.pad.bbl, bin: p.addendum.pad.bin,
+           lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
+}
+
+async function lookup(text) {
+  const g = await geocode(text);
+  const boro = g.bbl[0], block = String(+g.bbl.slice(1,6)), lot = String(+g.bbl.slice(6));
+  const B = g.bin;
+  const [pluto, elev, dobViol, ecb, safety, hpd, compl, boiler, fisp, ll84] = await Promise.all([
+    soda(DS.pluto, {bbl: g.bbl}),
+    soda(DS.elevators, {bin: B, $limit: 2000}),
+    soda(DS.dobViol, {bin: B, violation_category: "V-DOB VIOLATION - ACTIVE", $limit: 500, $order: "issue_date DESC"}),
+    soda(DS.ecb, {bin: B, ecb_violation_status: "ACTIVE", $limit: 500, $order: "issue_date DESC"}),
+    soda(DS.safety, {bin: B, violation_status: "Active", $limit: 500, $order: "violation_issue_date DESC"}),
+    soda(DS.hpd, {boroid: boro, block, lot, violationstatus: "Open", $limit: 1000, $order: "inspectiondate DESC"}),
+    soda(DS.complaints, {bin: B, status: "ACTIVE", $limit: 200}),
+    soda(DS.boiler, {bin_number: B, $limit: 200, $order: "inspection_date DESC"}),
+    soda(DS.fisp, {bin: B, $limit: 50, $order: "cycle DESC"}),
+    soda(DS.ll84, {nyc_borough_block_and_lot: g.bbl, $limit: 1, $order: "report_year DESC"}),
+  ]);
+  if (fisp) fisp.sort((a,b) => (+b.cycle - +a.cycle) || ((d(b.filing_date||b.submitted_on)||0) - (d(a.filing_date||a.submitted_on)||0)));
+  return { g, block: +block, pluto: pluto?.[0] || null, elev, dobViol, ecb, safety, hpd, compl, boiler, fisp, ll84: ll84?.[0] || null };
+}
+
+/* ---------- Rules engine (simplified NYC requirements) ---------- */
+function rules(r) {
+  const p = r.pluto || {}, floors = num(p.numfloors), area = num(p.bldgarea), units = num(p.unitsres) || 0,
+        built = num(p.yearbuilt), cls = p.bldgclass || "", cd = num(p.cd) % 100, lastDigit = r.block % 10;
+  const out = [];
+  const add = (o) => out.push(o);
+  const oneTwoFamily = /^[AB]/.test(cls);
+
+  // FISP / Local Law 11 (Cycle 10: 2025-2029)
+  if (floors != null) {
+    if (floors > 6) {
+      const sub = [4,5,6,9].includes(lastDigit) ? ["10A","Feb 21, 2025","2027-02-21"]
+                : [0,7,8].includes(lastDigit)   ? ["10B","Feb 21, 2026","2028-02-21"]
+                :                                 ["10C","Feb 21, 2027","2029-02-21"];
+      const c10 = (r.fisp || []).filter(x => String(x.cycle) === "10" && x.filing_type !== "Auto-Generated");
+      const last = (r.fisp || []).filter(x => x.filing_type !== "Auto-Generated").sort((a,b) => (d(b.filing_date||b.submitted_on)||0) - (d(a.filing_date||a.submitted_on)||0))[0];
+      const c10s = c10.map(x => x.current_status || "").join(" ");
+      let st = /UNSAFE/.test(c10s) ? ["bad","Filed: UNSAFE, repairs + shed required"] :
+               /SWARMP/.test(c10s) ? ["warn","Filed: SWARMP, repairs needed before next cycle"] :
+               c10.length ? ["ok","Cycle 10 report filed"] :
+               new Date(sub[1]) > NOW ? ["info","Window opens " + sub[1]] :
+               new Date(sub[2]) - NOW < 180*864e5 ? ["bad","Due soon / not filed"] : ["warn","Window open, not filed"];
+      add({cat:"Facade", name:"FISP facade inspection (Local Law 11)", law:"1 RCNY §103-04", freq:"Every 5 years",
+           due:`Sub-cycle ${sub[0]} (block ends in ${lastDigit}): file by ${ds(sub[2])}`, status:st,
+           note:last ? `Last filing: cycle ${last.cycle} ${last.filing_type}, ${ds(last.filing_date||last.submitted_on)}, status ${last.current_status || last.filing_status || "pending review"}` : "No FISP filings on record",
+           penalty:"$1,000/month failure to file, plus late fees"});
+    } else add({cat:"Facade", name:"FISP facade inspection (Local Law 11)", law:"1 RCNY §103-04", freq:"—", due:"—",
+                status:["na","Not required (6 stories or fewer)"], note:`${floors} floors`});
+  }
+
+  // LL84 benchmarking + LL97 emissions (>25k sf)
+  if (area != null) {
+    if (area > 25000) {
+      const y = num(r.ll84?.report_year);
+      add({cat:"Energy", name:"Energy & water benchmarking (LL84)", law:"Admin Code §28-309", freq:"Annual",
+           due:`May 1, ${YEAR} (${YEAR-1} data)`, status: y >= YEAR-2 ? ["ok",`Latest report: ${y}`] : ["warn", y ? `Latest public report: ${y}` : "No public report found"],
+           note: r.ll84?.energy_star_score ? `ENERGY STAR score: ${r.ll84.energy_star_score}` : "", penalty:"$500/quarter, up to $2,000/yr"});
+      add({cat:"Energy", name:"Building emissions report (LL97)", law:"Admin Code §28-320", freq:"Annual",
+           due:`May 1, ${YEAR} (${YEAR-1} emissions)`, status:["info","Required: covered building"],
+           note:"Report signed by an RDP. Emission limits tightened in 2030.", penalty:"$268 per tCO₂e over the limit, plus failure-to-file fees"});
+      add({cat:"Energy", name:"Lighting upgrades & sub-metering (LL88)", law:"Admin Code §28-310/311", freq:"One-time",
+           due:"Jan 1, 2025 (passed)", status:["warn","Verify filing"], note:""});
+    } else add({cat:"Energy", name:"Benchmarking / LL97", law:"LL84/LL97", freq:"—", due:"—", status:["na","Not covered (≤ 25,000 sf)"], note:`${fmt(area)} sf`});
+    if (area > 50000) {
+      let due = YEAR - (YEAR % 10) + lastDigit; if (due < YEAR) due += 10;
+      add({cat:"Energy", name:"Energy audit & retro-commissioning (LL87)", law:"Admin Code §28-308", freq:"Every 10 years",
+           due:`Dec 31, ${due} (block ends in ${lastDigit})`, status: due === YEAR ? ["bad","Due this year"] : ["info",`Next due ${due}`],
+           note:"EER filing required", penalty:"$3,000 first year, $5,000 each year after"});
+    }
+  }
+
+  // LL152 gas piping (4-year cycle by community district)
+  if (!isNaN(cd) && cd) {
+    const groups = {0:[1,3,10], 1:[2,5,7,13,18], 2:[4,6,8,9,16], 3:[11,12,14,15,17]};   // offset from 2024
+    let off = Object.keys(groups).find(k => groups[k].includes(cd));
+    if (off != null && !oneTwoFamily) {
+      let due = 2024 + +off; while (due < YEAR) due += 4;
+      add({cat:"Gas", name:"Gas piping periodic inspection (LL152)", law:"Admin Code §28-318", freq:"Every 4 years",
+           due:`Dec 31, ${due} (community district ${cd})`, status: due === YEAR ? ["bad","Due this year"] : ["info",`Next due ${due}`],
+           note:"GPS1 by an LMP, GPS2 certification within 60 days", penalty:"$10,000 failure to file"});
+    } else if (oneTwoFamily) add({cat:"Gas", name:"Gas piping periodic inspection (LL152)", law:"Admin Code §28-318", freq:"—", due:"—", status:["na","Exempt (1–2 family)"], note:""});
+  }
+
+  // Elevators
+  const act = (r.elev || []).filter(e => /active/i.test(e.device_status || ""));
+  if (act.length) {
+    const cat1Late = act.filter(e => num(e.cat1_report_year) < YEAR - (NOW.getMonth() < 0 ? 1 : 0) && num(e.cat1_report_year) < YEAR).length;
+    const cat5Due = act.filter(e => { const x = d(e.cat5_latest_report_filed); return x && (x.getFullYear() + 5) <= YEAR; }).length;
+    const cat5None = act.filter(e => !e.cat5_latest_report_filed && /elevator/i.test(e.device_type || "")).length;
+    add({cat:"Elevator", name:"Elevator CAT1 annual test", law:"1 RCNY §101-07", freq:"Annual",
+         due:`Dec 31, ${YEAR}`, status: cat1Late ? ["warn",`${cat1Late}/${act.length} not yet filed for ${YEAR}`] : ["ok","All devices filed"],
+         note:"Devices listed below", penalty:"$3,000 per device, failure to file"});
+    add({cat:"Elevator", name:"Elevator CAT5 5-year test", law:"1 RCNY §101-07", freq:"Every 5 years",
+         due:"5 years from the last CAT5", status: cat5Due ? ["bad",`${cat5Due} device(s) due/overdue`] : cat5None ? ["warn",`${cat5None} elevator(s) with no CAT5 on record`] : ["ok","None due this year"],
+         note:"Lifts, escalators and dumbwaiters often have no CAT5 record", penalty:"$5,000 per device, failure to file"});
+    add({cat:"Elevator", name:"Elevator periodic inspection", law:"1 RCNY §101-07", freq:"Annual (Jan 1–Dec 31)",
+         due:`Dec 31, ${YEAR}`, status:["info",`${act.length} active device(s)`], note:"", penalty:"$1,000 per device"});
+  }
+
+  // Boilers
+  if ((r.boiler || []).length) {
+    const byId = {}; r.boiler.forEach(b => { if (!byId[b.boiler_id]) byId[b.boiler_id] = b; });
+    const ids = Object.values(byId), stale = ids.filter(b => (d(b.inspection_date)?.getFullYear() || 0) < YEAR).length;
+    add({cat:"Boiler", name:"Boiler annual inspection", law:"Admin Code §28-303", freq:"Annual",
+         due:`Dec 31, ${YEAR} (file within 14 days of inspection)`, status: stale ? ["warn",`${stale}/${ids.length} not yet inspected in ${YEAR}`] : ["ok","Filed this year"],
+         note:"", penalty:"$1,000 per boiler, failure to file"});
+  } else add({cat:"Boiler", name:"Boiler annual inspection", law:"Admin Code §28-303", freq:"Annual", due:"—",
+              status:["na","No boiler filings on record"], note:"Applies if the building has a regulated boiler (1–2 family residential boilers are exempt)"});
+
+  // Residential (HPD)
+  if (units >= 3) {
+    add({cat:"Housing", name:"HPD property registration", law:"HMC §27-2097", freq:"Annual", due:`Sep 1, ${YEAR}`, status:["info","Required (3+ units)"], note:"", penalty:"Can't certify violations or bring nonpayment cases"});
+    add({cat:"Housing", name:"Indoor allergen inspection (LL55)", law:"Admin Code §27-2017", freq:"Annual", due:"Annual unit inspections", status:["info","Required"], note:"Pests and mold", penalty:""});
+    if (built && built < 1960) add({cat:"Housing", name:"Lead paint: annual inspection + XRF (LL1/LL31)", law:"Admin Code §27-2056", freq:"Annual; XRF by Aug 9, 2025",
+         due:"Annual notice by Jan 16", status:["warn","Pre-1960 building: lead rules apply"], note:`Built ${built}`, penalty:""});
+  }
+  add({cat:"Water", name:"Backflow prevention device test", law:"15 RCNY §20-04", freq:"Annual", due:"Annual (DEP GEN-215B)", status:["info","If the building has a backflow device"], note:"", penalty:""});
+  add({cat:"Fire", name:"Sprinkler/standpipe & fire alarm inspections", law:"NYC Fire Code", freq:"Varies (monthly–5 years)", due:"Per FDNY schedule", status:["info","If equipped"], note:"", penalty:""});
+  return out;
+}
+
+/* ---------- Render ---------- */
+let VIOL = [];
+function render(r) {
+  const p = r.pluto || {}, g = r.g, reqs = rules(r);
+  const na = x => x == null ? " (source unavailable)" : "";
+  VIOL = [
+    ...(r.dobViol||[]).map(v => ({src:"DOB", date:v.issue_date, type:(v.violation_type||"").split(/\s{2,}/)[0], desc:v.description || v.violation_type_code + " violation (no description in BIS; see DOB BIS)", id:v.number, extra:""})),
+    ...(r.ecb||[]).map(v => ({src:"ECB/OATH", date:v.issue_date, type:v.violation_type, desc:v.violation_description, id:v.ecb_violation_number, extra:v.balance_due>0?`Balance due ${money(+v.balance_due)}`:v.severity})),
+    ...(r.safety||[]).map(v => ({src:"DOB NOW Safety", date:v.violation_issue_date, type:v.device_type, desc:v.violation_remarks, id:v.violation_number, extra:""})),
+    ...(r.hpd||[]).map(v => ({src:"HPD", date:v.inspectiondate, type:"Class " + v.class, desc:v.novdescription, id:v.violationid, extra:v.currentstatus})),
+    ...(r.compl||[]).map(v => ({src:"DOB Complaint", date:v.date_entered, type:"Category " + v.complaint_category, desc:"Open complaint", id:v.complaint_number, extra:""})),
+  ].sort((a,b) => (d(b.date)||0) - (d(a.date)||0));
+  const ecbBal = (r.ecb||[]).reduce((s,v) => s + (+v.balance_due || 0), 0);
+  const dueNow = reqs.filter(x => x.status[0] === "bad").length, warn = reqs.filter(x => x.status[0] === "warn").length;
+  const elev = (r.elev||[]).filter(e => /active/i.test(e.device_status||""));
+  const cats = [...new Set(VIOL.map(v => v.src))];
+
+  $("#out").innerHTML = `
+  <div class="card">
+    <h2>${esc(g.label.replace(", USA",""))}</h2>
+    <p class="sub">${esc(g.borough)} · ZIP ${esc(g.zip)} · BIN ${esc(g.bin)} · BBL ${esc(g.bbl)} ·
+      <a href="https://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?bin=${g.bin}" target="_blank">DOB BIS</a> ·
+      <a href="https://hpdonline.nyc.gov/hpdonline/" target="_blank">HPD Online</a></p>
+    <div class="facts">
+      <div class="fact"><small>Owner</small><b style="font-size:14px">${esc(p.ownername || "—")}</b></div>
+      <div class="fact"><small>Floors</small><b>${fmt(num(p.numfloors))}</b></div>
+      <div class="fact"><small>Gross floor area</small><b>${fmt(num(p.bldgarea))} sf</b></div>
+      <div class="fact"><small>Year built</small><b>${esc(p.yearbuilt || "—")}</b></div>
+      <div class="fact"><small>Residential units</small><b>${fmt(num(p.unitsres))}</b></div>
+      <div class="fact"><small>Building class</small><b>${esc(p.bldgclass || "—")}</b></div>
+      <div class="fact"><small>Community district</small><b>${esc(p.cd || "—")}</b></div>
+      <div class="fact"><small>Tax block</small><b>${r.block}</b></div>
+    </div>
+    ${r.pluto ? "" : `<p class="err" style="margin-top:14px">No PLUTO record was found, so rules that depend on floors, area or community district were skipped.</p>`}
+  </div>
+
+  <div class="kpis">
+    <div class="kpi ${dueNow?"bad":"ok"}"><b>${dueNow}</b><span>Requirements due now / overdue</span></div>
+    <div class="kpi ${warn?"warn":"ok"}"><b>${warn}</b><span>Need attention</span></div>
+    <div class="kpi ${VIOL.length?"bad":"ok"}"><b>${VIOL.length}</b><span>Open violations & complaints</span></div>
+    <div class="kpi ${ecbBal?"bad":"ok"}"><b>${money(ecbBal)}</b><span>ECB/OATH balance due</span></div>
+    <div class="kpi"><b>${elev.length}</b><span>Active elevator devices</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Compliance requirements & deadlines</h3>
+    <table><thead><tr><th>Requirement</th><th>Frequency</th><th>Next deadline</th><th>Status</th><th>Typical penalty</th></tr></thead><tbody>
+    ${reqs.map(x => `<tr><td><b>${esc(x.name)}</b><div class="law">${esc(x.cat)} · ${esc(x.law)}${x.note ? " · " + esc(x.note) : ""}</div></td>
+      <td>${esc(x.freq)}</td><td>${esc(x.due)}</td><td>${chip(x.status[0], x.status[1])}</td><td class="law">${esc(x.penalty || "")}</td></tr>`).join("")}
+    </tbody></table>
+  </div>
+
+  <div class="card">
+    <h3>Open violations & complaints (${VIOL.length})</h3>
+    <p class="src">Sources: DOB${na(r.dobViol)}, ECB/OATH${na(r.ecb)}, DOB NOW Safety${na(r.safety)}, HPD${na(r.hpd)}, DOB Complaints${na(r.compl)}</p>
+    ${VIOL.length ? `<div class="tabs" id="vt"><button class="tab on" data-s="">All (${VIOL.length})</button>
+      ${cats.map(c => `<button class="tab" data-s="${esc(c)}">${esc(c)} (${VIOL.filter(v=>v.src===c).length})</button>`).join("")}</div>
+      <div class="scroll"><table><thead><tr><th>Date</th><th>Source</th><th>Type</th><th>Description</th><th>Status / #</th></tr></thead><tbody id="vb"></tbody></table></div>`
+      : `<p>${chip("ok","No open violations found")}</p>`}
+  </div>
+
+  ${elev.length ? `<div class="card"><h3>Elevator devices (${elev.length} active)</h3><div class="scroll"><table>
+    <thead><tr><th>Device</th><th>Type</th><th>Last CAT1</th><th>Last CAT5</th><th>CAT5 due</th><th>Last periodic</th></tr></thead><tbody>
+    ${elev.sort((a,b)=>(d(a.cat5_latest_report_filed)||0)-(d(b.cat5_latest_report_filed)||0)).map(e => {
+      const c5 = d(e.cat5_latest_report_filed), due = c5 ? c5.getFullYear() + 5 : null;
+      const c1ok = num(e.cat1_report_year) >= YEAR;
+      return `<tr><td>${esc(e.device_number)}</td><td>${esc(e.device_type)}</td>
+        <td>${ds(e.cat1_latest_report_filed)} ${c1ok ? chip("ok", YEAR+" filed") : chip("warn", YEAR+" pending")}</td>
+        <td>${ds(e.cat5_latest_report_filed)}</td>
+        <td>${due ? (due <= YEAR ? chip("bad", due) : chip(due === YEAR+1 ? "warn" : "ok", due)) : chip("na","No record")}</td>
+        <td>${ds(e.periodic_latest_inspection)}</td></tr>`}).join("")}
+    </tbody></table></div></div>` : ""}
+
+  ${(r.fisp||[]).length ? `<div class="card"><h3>Facade (FISP) filing history</h3><table>
+    <thead><tr><th>Cycle</th><th>TR6 #</th><th>Type</th><th>Filed</th><th>Status</th><th>Late / FTF fees</th></tr></thead><tbody>
+    ${r.fisp.map(f => `<tr><td>${esc(f.cycle)}</td><td>${esc(f.tr6_no)}</td><td>${esc(f.filing_type)}</td><td>${ds(f.filing_date || f.submitted_on)}</td>
+      <td>${chip(/UNSAFE/.test(f.current_status||"") ? "bad" : f.current_status==="SAFE" ? "ok" : f.current_status==="SWARMP" ? "warn" : "na", f.current_status || f.filing_status || "Pending review")}</td>
+      <td>${money((+f.late_filing_amt||0)+(+f.failure_to_file_amt||0)+(+f.failure_to_correct_amt||0))}</td></tr>`).join("")}
+    </tbody></table><p class="src">SAFE = no action needed · SWARMP = safe with repair & maintenance program · UNSAFE = hazardous, needs sidewalk shed and repairs</p></div>` : ""}
+
+  ${r.ll84 ? `<div class="card"><h3>Energy benchmarking (LL84, ${esc(r.ll84.report_year)})</h3><div class="facts">
+    ${[["ENERGY STAR score","energy_star_score"],["Site EUI (kBtu/ft²)",k=>Object.keys(r.ll84).find(x=>/^site_eui/.test(x))],
+       ["Total GHG (tCO₂e)",k=>Object.keys(r.ll84).find(x=>/total_ghg|total_location_based_ghg/.test(x))],["Property type","largest_property_use_type"],["Occupancy %","occupancy"]]
+      .map(([l,k]) => { const key = typeof k === "function" ? k() : k; return `<div class="fact"><small>${l}</small><b>${esc(key ? (isNaN(r.ll84[key]) ? r.ll84[key] : fmt(Math.round(+r.ll84[key]*10)/10)) : "—")}</b></div>`; }).join("")}
+  </div></div>` : ""}
+  <p class="src">Checked ${NOW.toLocaleString()}. Violation data can lag agency systems by 1–7 days.</p>`;
+
+  drawViol("");
+  document.querySelectorAll("#vt .tab").forEach(b => b.onclick = () => {
+    document.querySelectorAll("#vt .tab").forEach(x => x.classList.remove("on")); b.classList.add("on"); drawViol(b.dataset.s); });
+}
+function drawViol(src) {
+  const tb = $("#vb"); if (!tb) return;
+  tb.innerHTML = VIOL.filter(v => !src || v.src === src).map(v =>
+    `<tr><td style="white-space:nowrap">${ds(v.date)}</td><td>${chip(v.src==="HPD"?"warn":"bad", v.src)}</td><td>${esc(v.type)}</td>
+     <td>${esc(v.desc)}</td><td class="law">${esc(v.extra)}<br>${esc(v.id)}</td></tr>`).join("");
+}
+
+async function run(addr) {
+  if (!addr.trim()) return;
+  const btn = $("#go"); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+  $("#out").innerHTML = `<div class="card">Looking up <b>${esc(addr)}</b> across 11 NYC datasets…</div>`;
+  history.replaceState(null, "", "?a=" + encodeURIComponent(addr));
+  try { render(await lookup(addr)); }
+  catch (e) { $("#out").innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+  finally { btn.disabled = false; btn.textContent = "Check building"; }
+}
+$("#f").onsubmit = e => { e.preventDefault(); run($("#q").value); };
+document.querySelectorAll(".hint a").forEach(a => a.onclick = () => { $("#q").value = a.dataset.a; run(a.dataset.a); });
+const pre = new URLSearchParams(location.search).get("a"); if (pre) { $("#q").value = pre; run(pre); }
+</script>
+</body>
+</html>
