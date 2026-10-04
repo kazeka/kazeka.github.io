@@ -66,15 +66,96 @@ tbody tr:hover td{background:#f8fafc}
 .src a{color:var(--muted)}
 footer{background:var(--slate-9);color:#8a98a8;padding:24px 32px;font-size:13px;border-top:3px solid var(--blue)}
 .hidden{display:none}
-@media print{nav,.hero,footer{display:none}body{background:#fff}.scroll{max-height:none}}
+nav .btn.ghostnav{background:transparent;border:1px solid #5a6b7c;padding:7px 16px;font-size:13px;margin-right:8px}
+nav .btn.ghostnav:hover{background:var(--slate-8);border-color:#8a9aab}
+.modal-bg{position:fixed;inset:0;background:rgba(20,28,38,.55);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:48px 20px;overflow:auto}
+.modal-bg.hidden{display:none}
+.modal{background:#fff;width:100%;max-width:820px;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:var(--r);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.modal-h{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 14px;border-bottom:1px solid var(--line)}
+.modal-b{padding:6px 24px 10px;max-height:calc(100vh - 260px);overflow:auto}
+.modal-f{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;border-top:1px solid var(--line);background:#f6f8fa}
+.fsec{margin:18px 0 6px}
+.fsec-h{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.fsec-h h4{margin:0;font-size:13px;text-transform:uppercase;letter-spacing:.6px}
+.fsec-h span{font-size:12px;color:var(--muted)}
+.fsec p.intro{font-size:13px;color:var(--slate-6);margin:0 0 10px}
+.fitem{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line-l)}
+.fitem:first-of-type{border-top:0}
+.fitem .ic{width:18px;height:18px;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border-radius:var(--r)}
+.fitem.done .ic{background:var(--okbg);color:var(--ok);border:1px solid #c5dccb}
+.fitem.prog .ic{background:var(--infobg);color:var(--info);border:1px solid #c4d7ea}
+.fitem.plan .ic{background:#f1f3f5;color:var(--muted);border:1px solid var(--line)}
+.fitem b{font-size:14px;font-weight:600}.fitem div.d{font-size:13px;color:var(--slate-6);margin-top:1px}
+.fitem .where{font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:.4px;margin-left:6px;font-weight:600}
+.fbar{display:flex;height:8px;margin:14px 0 4px;border:1px solid var(--line)}
+.fbar i{display:block;height:100%}
+.fstats{display:flex;gap:18px;font-size:12px;color:var(--slate-6);margin-bottom:4px}
+.fstats b{font-family:"IBM Plex Mono",monospace;color:var(--ink)}
+nav a.nl{color:#aab6c3;text-decoration:none;font-size:14px;font-weight:500;height:56px;display:flex;align-items:center;padding:0 14px;border-bottom:3px solid transparent;margin-bottom:-3px}
+nav a.nl:hover{color:#fff}
+nav a.nl.on{color:#fff;border-bottom-color:#7fb0e0}
+.badge{background:var(--blue);color:#fff;font-size:11px;font-weight:600;padding:1px 6px;margin-left:7px;border-radius:var(--r)}
+.hero.sm{padding:30px 32px 28px}.hero.sm h1{font-size:26px;margin-bottom:6px}.hero.sm p{margin-bottom:18px}
+.search input + input{border-left:1px solid #b9c4cf}
+.search input.name{flex:0 0 210px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.btn.sm{padding:7px 13px;font-size:12px}
+.btn.ghost{background:transparent;border:1px solid #6f8091;color:#e6ecf2}.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn.light{background:#fff;color:var(--slate-8);border:1px solid var(--line)}.btn.light:hover{background:#f1f4f7}
+.btn.danger{background:transparent;border:1px solid #8a5a5a;color:#f0c8c8}.btn.danger:hover{background:rgba(161,42,42,.25)}
+.titlebar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.iconbtn{background:none;border:1px solid var(--line);border-radius:var(--r);padding:3px 8px;font:600 12px "IBM Plex Sans",sans-serif;color:var(--slate-6);cursor:pointer}
+.iconbtn:hover{background:var(--blue-l);color:var(--blue);border-color:#c4d7ea}
+.risk{display:flex;align-items:center;gap:8px;white-space:nowrap}.risk .bar{width:56px;height:6px;background:#e6eaee}.risk .bar i{display:block;height:100%}
+th.sort{cursor:pointer;user-select:none}th.sort:hover{color:var(--ink)}th.sort.on{color:var(--blue)}
+.bname{font-weight:600}.bname a{color:var(--ink);text-decoration:none;cursor:pointer}.bname a:hover{color:var(--blue);text-decoration:underline}
+.progress{background:var(--blue-l);border:1px solid #c4d7ea;color:var(--blue-d);padding:10px 14px;margin-bottom:16px;font-size:14px;border-radius:var(--r)}
+.empty{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+.filters{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:6px}
+.filters label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--slate-6);display:flex;flex-direction:column;gap:4px}
+select{font:14px "IBM Plex Sans",sans-serif;padding:7px 10px;border:1px solid var(--line);border-radius:var(--r);background:#fff;color:var(--ink);min-width:150px}
+.filters label.chk{flex-direction:row;padding-bottom:8px}.chk{font-size:13px;color:var(--ink);display:flex;align-items:center;gap:6px;text-transform:none;letter-spacing:0}
+.strip{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:6px}
+.strip a{display:block;border:1px solid var(--line);background:#fff;text-decoration:none;color:var(--ink);padding:6px 4px 4px;text-align:center;cursor:pointer;border-radius:var(--r)}
+.strip a:hover{border-color:var(--blue)}
+.strip small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+.strip b{font:500 16px "IBM Plex Mono",monospace}
+.strip i{display:block;height:3px;margin-top:4px;background:var(--blue)}
+.mhead{display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--slate-8)}
+.mhead h4{margin:0;font-size:15px;text-transform:uppercase;letter-spacing:.6px}.mhead span{color:var(--muted);font-size:13px}
+.mhead.over{border-bottom-color:var(--bad)}.mhead.over h4{color:var(--bad)}
+.ev{display:grid;grid-template-columns:58px 1fr 110px 230px 92px;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-top:0;padding:10px 14px}
+.mhead + .ev{border-top:1px solid var(--line)}
+.dbox{border:1px solid var(--line);text-align:center;width:50px;border-radius:var(--r)}
+.dbox small{display:block;font-size:10px;text-transform:uppercase;color:var(--slate-6);background:#f6f8fa;border-bottom:1px solid var(--line);padding:1px 0}
+.dbox b{font:500 19px "IBM Plex Mono",monospace;display:block;padding:2px 0}
+.ev .t{font-weight:600;font-size:14px}.ev .b{font-size:12px;color:var(--muted)}
+.ev .left{font:500 13px "IBM Plex Mono",monospace;text-align:right;color:var(--slate-6)}
+@media (max-width:900px){.ev{grid-template-columns:58px 1fr;}.ev>div:nth-child(n+3){grid-column:2}.ev .left{text-align:left}}
+@media print{nav,.hero,footer,.noprint,.modal-bg{display:none!important}body{background:#fff}.scroll{max-height:none}}
 </style>
 </head>
 <body>
-<nav><div class="logo">Compli<span>Check</span> NYC</div><div class="sp"></div><a class="btn" href="#" onclick="window.print();return false">Print report</a></nav>
+<nav><div class="logo">Compli<span>Check</span> NYC</div>
+  <a class="nl" href="#/check" data-v="check">Building check</a>
+  <a class="nl" href="#/portfolio" data-v="portfolio">Portfolio<span class="badge" id="pcount">0</span></a>
+  <a class="nl" href="#/calendar" data-v="calendar">Calendar</a>
+  <div class="sp"></div><button class="btn ghostnav" id="featbtn" type="button">Features</button><a class="btn" href="#" onclick="window.print();return false">Print</a></nav>
 
+<div class="modal-bg hidden" id="featmodal" role="dialog" aria-modal="true" aria-labelledby="feattitle">
+  <div class="modal">
+    <div class="modal-h"><div><h2 id="feattitle">What's in CompliCheck NYC</h2><p class="sub" style="margin:2px 0 0">Features available now, in progress and planned.</p></div>
+      <button class="iconbtn" id="featclose" aria-label="Close">✕</button></div>
+        <div class="modal-b" id="featbody"></div>
+    <div class="modal-f"><span class="src" id="featupd"></span><button class="btn sm" id="featok">Got it</button></div>
+  </div>
+</div>
+
+<div id="v-check" class="view">
 <section class="hero">
   <h1>NYC Building Compliance Check</h1>
-  <p>Enter any New York City address to see its required inspections and filing deadlines (FISP, LL87, LL152, LL84/97, elevators, boilers) and its open violations, pulled live from NYC Open Data.</p>
+  <p>Enter any New York City address to see its required inspections and filing deadlines (FISP, LL87, LL152, LL84/97, elevators, boilers) and its open violations, cooling towers, fines, hearings and permits, pulled live from NYC Open Data.</p>
   <form class="search" id="f">
     <input id="q" placeholder="e.g. 350 5th Ave, Manhattan" autocomplete="off">
     <button class="btn" id="go">Check building</button>
@@ -83,14 +164,45 @@ footer{background:var(--slate-9);color:#8a98a8;padding:24px 32px;font-size:13px;
 </section>
 
 <main id="out"></main>
+</div>
 
-<footer>Data: NYC DOB, HPD, DOB NOW, DCP PLUTO and LL84 datasets via NYC Open Data, plus NYC Planning GeoSearch. Rules are simplified. Check deadlines against official DOB/HPD sources before you act on them.</footer>
+<div id="v-portfolio" class="view hidden">
+<section class="hero sm">
+  <h1>Portfolio</h1>
+  <p>All your buildings in one table, ranked by compliance risk. Saved in this browser.</p>
+  <form class="search" id="padd">
+    <input id="paddr" placeholder="Add an address, e.g. 1 Centre St, Manhattan" autocomplete="off">
+    <input id="pname" class="name" placeholder="Name (optional)" autocomplete="off">
+    <button class="btn">Add</button>
+  </form>
+  <div class="toolbar">
+    <button class="btn sm ghost" id="pimport">Import CSV</button><input type="file" id="pfile" accept=".csv,.txt" hidden>
+    <button class="btn sm ghost" id="prefresh">Refresh all</button>
+    <button class="btn sm ghost" id="pexport">Export CSV</button>
+    <button class="btn sm ghost" id="pics">Export all deadlines (.ics)</button>
+    <button class="btn sm danger" id="pclear">Clear portfolio</button>
+  </div>
+</section>
+<main id="pout"></main>
+</div>
+
+<div id="v-calendar" class="view hidden">
+<section class="hero sm">
+  <h1>Compliance calendar</h1>
+  <p>Every filing deadline, inspection window, OATH hearing and permit expiry across your portfolio.</p>
+  <div class="toolbar"><button class="btn sm ghost" id="cics">Export filtered (.ics)</button></div>
+</section>
+<main id="cout"></main>
+</div>
+
+<footer>Data: NYC DOB, HPD, DOB NOW, OATH, DOHMH, DEP, DCP PLUTO and LL84 datasets via NYC Open Data, plus NYC Planning GeoSearch. Portfolio data stays in your browser (localStorage). Rules are simplified. Check deadlines against official DOB/HPD sources before you act on them.</footer>
 
 <script>
 const SODA = "https://data.cityofnewyork.us/resource/";
 const DS = {
   pluto:"64uk-42ks", elevators:"e5aq-a4j2", dobViol:"3h2n-5cm9", ecb:"6bgk-3dad", safety:"855j-jady",
-  hpd:"wvxf-dwi5", complaints:"eabe-havv", boiler:"52dp-yji6", fisp:"xubg-57si", ll84:"5zyy-y8am"
+  hpd:"wvxf-dwi5", complaints:"eabe-havv", boiler:"52dp-yji6", fisp:"xubg-57si", ll84:"5zyy-y8am",
+  oath:"jz4z-kudi", towers:"y4fw-iqfr", towerInsp:"f9wb-g8mb", cats:"f4rp-2kvy", permits:"rbx6-tga4", co:"pkdm-hqz6"
 };
 const NOW = new Date(), YEAR = NOW.getFullYear();
 const $ = s => document.querySelector(s);
@@ -100,6 +212,13 @@ const fmt = n => n == null || isNaN(n) ? "—" : Number(n).toLocaleString("en-US
 const money = n => n == null ? "—" : "$" + fmt(Math.round(n));
 const d = s => { if (!s) return null; if (/^\d{8}$/.test(s)) s = s.slice(0,4)+"-"+s.slice(4,6)+"-"+s.slice(6); const x = new Date(s); return isNaN(x) ? null : x; };
 const ds = s => { const x = d(s); return x ? x.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"}) : "—"; };
+const BORO = {1:"MANHATTAN",2:"BRONX",3:"BROOKLYN",4:"QUEENS",5:"STATEN IS"};
+const TODAY = new Date(NOW.getFullYear(), NOW.getMonth(), NOW.getDate());
+const daysTo = x => x ? Math.round((x - TODAY) / 864e5) : null;
+const pad = n => String(n).padStart(2, "0");
+const iso = x => x ? `${x.getFullYear()}-${pad(x.getMonth()+1)}-${pad(x.getDate())}` : null;
+const fromIso = s => s ? new Date(s.length === 10 ? s + "T00:00:00" : s) : null;
+const nextAnnual = (m, day) => { const x = new Date(YEAR, m-1, day); return x < TODAY ? new Date(YEAR+1, m-1, day) : x; };
 const chip = (cls, t) => `<span class="chip c-${cls}">${esc(t)}</span>`;
 
 async function soda(id, params) {
@@ -113,6 +232,9 @@ async function geocode(text) {
   const j = await r.json(); const f = j.features && j.features[0];
   if (!f || !f.properties.addendum?.pad) throw new Error("Address not found in NYC. Include the borough, e.g. \"350 5th Ave, Manhattan\".");
   const p = f.properties;
+  const hn = (text.trim().match(/^(\d+[-\d]*)/) || [])[1];
+  if (hn && p.housenumber && hn.replace(/-/g,"") !== String(p.housenumber).replace(/-/g,""))
+    throw new Error(`No exact NYC match for "${text}" (closest: ${p.label.replace(", USA","")}). Check the address and include the borough.`);
   return { label: p.label, borough: p.borough, zip: p.postalcode, bbl: p.addendum.pad.bbl, bin: p.addendum.pad.bin,
            lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0] };
 }
@@ -121,7 +243,9 @@ async function lookup(text) {
   const g = await geocode(text);
   const boro = g.bbl[0], block = String(+g.bbl.slice(1,6)), lot = String(+g.bbl.slice(6));
   const B = g.bin;
-  const [pluto, elev, dobViol, ecb, safety, hpd, compl, boiler, fisp, ll84] = await Promise.all([
+  const OPEN_OATH = "('DOCKETED','RESCHEDULED','NEW ISSUANCE','DEFAULTED','HEARING COMPLETED','IN VIOLATION','STAYED')";
+  const nowIso = NOW.toISOString().slice(0,10);
+  const [pluto, elev, dobViol, ecb, safety, hpd, compl, boiler, fisp, ll84, oath, towers, towerInsp, cats, permits, co] = await Promise.all([
     soda(DS.pluto, {bbl: g.bbl}),
     soda(DS.elevators, {bin: B, $limit: 2000}),
     soda(DS.dobViol, {bin: B, violation_category: "V-DOB VIOLATION - ACTIVE", $limit: 500, $order: "issue_date DESC"}),
@@ -129,12 +253,20 @@ async function lookup(text) {
     soda(DS.safety, {bin: B, violation_status: "Active", $limit: 500, $order: "violation_issue_date DESC"}),
     soda(DS.hpd, {boroid: boro, block, lot, violationstatus: "Open", $limit: 1000, $order: "inspectiondate DESC"}),
     soda(DS.complaints, {bin: B, status: "ACTIVE", $limit: 200}),
-    soda(DS.boiler, {bin_number: B, $limit: 200, $order: "inspection_date DESC"}),
+    soda(DS.boiler, {bin_number: B, $limit: 1000}),
     soda(DS.fisp, {bin: B, $limit: 50, $order: "cycle DESC"}),
     soda(DS.ll84, {nyc_borough_block_and_lot: g.bbl, $limit: 1, $order: "report_year DESC"}),
+    soda(DS.oath, {violation_location_borough: BORO[boro], violation_location_block_no: block.padStart(5,"0"), violation_location_lot_no: lot.padStart(5,"0"),
+                   $where: `(balance_due > 0 OR hearing_status in ${OPEN_OATH})`, $limit: 500, $order: "violation_date DESC"}),
+    soda(DS.towers, {bin: B, $limit: 50}),
+    soda(DS.towerInsp, {bin: B, $limit: 200, $order: "inspection_date DESC"}),
+    soda(DS.cats, {bin: B, $limit: 200, $order: "issuedate DESC"}),
+    soda(DS.permits, {bin: B, permit_status: "Permit Issued", $where: `expired_date > '${nowIso}'`, $limit: 500, $order: "expired_date ASC"}),
+    soda(DS.co, {bin: B, $limit: 1, $order: "submitted_date DESC"}),
   ]);
   if (fisp) fisp.sort((a,b) => (+b.cycle - +a.cycle) || ((d(b.filing_date||b.submitted_on)||0) - (d(a.filing_date||a.submitted_on)||0)));
-  return { g, block: +block, pluto: pluto?.[0] || null, elev, dobViol, ecb, safety, hpd, compl, boiler, fisp, ll84: ll84?.[0] || null };
+  return { g, block: +block, pluto: pluto?.[0] || null, elev, dobViol, ecb, safety, hpd, compl, boiler, fisp, ll84: ll84?.[0] || null,
+           oath, towers, towerInsp, cats, permits, co: co?.[0] || null };
 }
 
 /* ---------- Rules engine (simplified NYC requirements) ---------- */
@@ -142,7 +274,7 @@ function rules(r) {
   const p = r.pluto || {}, floors = num(p.numfloors), area = num(p.bldgarea), units = num(p.unitsres) || 0,
         built = num(p.yearbuilt), cls = p.bldgclass || "", cd = num(p.cd) % 100, lastDigit = r.block % 10;
   const out = [];
-  const add = (o) => out.push(o);
+  const add = (o) => { o.dd = o.dd ? (o.dd instanceof Date ? o.dd : fromIso(String(o.dd))) : null; out.push(o); };
   const oneTwoFamily = /^[AB]/.test(cls);
 
   // FISP / Local Law 11 (Cycle 10: 2025-2029)
@@ -160,7 +292,7 @@ function rules(r) {
                new Date(sub[1]) > NOW ? ["info","Window opens " + sub[1]] :
                new Date(sub[2]) - NOW < 180*864e5 ? ["bad","Due soon / not filed"] : ["warn","Window open, not filed"];
       add({cat:"Facade", name:"FISP facade inspection (Local Law 11)", law:"1 RCNY §103-04", freq:"Every 5 years",
-           due:`Sub-cycle ${sub[0]} (block ends in ${lastDigit}): file by ${ds(sub[2])}`, status:st,
+           due:`Sub-cycle ${sub[0]} (block ends in ${lastDigit}): file by ${ds(sub[2])}`, dd: c10.length ? null : sub[2], status:st,
            note:last ? `Last filing: cycle ${last.cycle} ${last.filing_type}, ${ds(last.filing_date||last.submitted_on)}, status ${last.current_status || last.filing_status || "pending review"}` : "No FISP filings on record",
            penalty:"$1,000/month failure to file, plus late fees"});
     } else add({cat:"Facade", name:"FISP facade inspection (Local Law 11)", law:"1 RCNY §103-04", freq:"—", due:"—",
@@ -172,10 +304,10 @@ function rules(r) {
     if (area > 25000) {
       const y = num(r.ll84?.report_year);
       add({cat:"Energy", name:"Energy & water benchmarking (LL84)", law:"Admin Code §28-309", freq:"Annual",
-           due:`May 1, ${YEAR} (${YEAR-1} data)`, status: y >= YEAR-2 ? ["ok",`Latest report: ${y}`] : ["warn", y ? `Latest public report: ${y}` : "No public report found"],
+           due:`${ds(nextAnnual(5,1))} (prior-year data)`, dd: nextAnnual(5,1), status: y >= YEAR-2 ? ["ok",`Latest report: ${y}`] : ["warn", y ? `Latest public report: ${y}` : "No public report found"],
            note: r.ll84?.energy_star_score ? `ENERGY STAR score: ${r.ll84.energy_star_score}` : "", penalty:"$500/quarter, up to $2,000/yr"});
       add({cat:"Energy", name:"Building emissions report (LL97)", law:"Admin Code §28-320", freq:"Annual",
-           due:`May 1, ${YEAR} (${YEAR-1} emissions)`, status:["info","Required: covered building"],
+           due:`${ds(nextAnnual(5,1))} (prior-year emissions)`, dd: nextAnnual(5,1), status:["info","Required: covered building"],
            note:"Report signed by an RDP. Emission limits tightened in 2030.", penalty:"$268 per tCO₂e over the limit, plus failure-to-file fees"});
       add({cat:"Energy", name:"Lighting upgrades & sub-metering (LL88)", law:"Admin Code §28-310/311", freq:"One-time",
            due:"Jan 1, 2025 (passed)", status:["warn","Verify filing"], note:""});
@@ -183,7 +315,7 @@ function rules(r) {
     if (area > 50000) {
       let due = YEAR - (YEAR % 10) + lastDigit; if (due < YEAR) due += 10;
       add({cat:"Energy", name:"Energy audit & retro-commissioning (LL87)", law:"Admin Code §28-308", freq:"Every 10 years",
-           due:`Dec 31, ${due} (block ends in ${lastDigit})`, status: due === YEAR ? ["bad","Due this year"] : ["info",`Next due ${due}`],
+           due:`Dec 31, ${due} (block ends in ${lastDigit})`, dd:`${due}-12-31`, status: due === YEAR ? ["bad","Due this year"] : ["info",`Next due ${due}`],
            note:"EER filing required", penalty:"$3,000 first year, $5,000 each year after"});
     }
   }
@@ -195,7 +327,7 @@ function rules(r) {
     if (off != null && !oneTwoFamily) {
       let due = 2024 + +off; while (due < YEAR) due += 4;
       add({cat:"Gas", name:"Gas piping periodic inspection (LL152)", law:"Admin Code §28-318", freq:"Every 4 years",
-           due:`Dec 31, ${due} (community district ${cd})`, status: due === YEAR ? ["bad","Due this year"] : ["info",`Next due ${due}`],
+           due:`Dec 31, ${due} (community district ${cd})`, dd:`${due}-12-31`, status: due === YEAR ? ["bad","Due this year"] : ["info",`Next due ${due}`],
            note:"GPS1 by an LMP, GPS2 certification within 60 days", penalty:"$10,000 failure to file"});
     } else if (oneTwoFamily) add({cat:"Gas", name:"Gas piping periodic inspection (LL152)", law:"Admin Code §28-318", freq:"—", due:"—", status:["na","Exempt (1–2 family)"], note:""});
   }
@@ -205,37 +337,126 @@ function rules(r) {
   if (act.length) {
     const cat1Late = act.filter(e => num(e.cat1_report_year) < YEAR - (NOW.getMonth() < 0 ? 1 : 0) && num(e.cat1_report_year) < YEAR).length;
     const cat5Due = act.filter(e => { const x = d(e.cat5_latest_report_filed); return x && (x.getFullYear() + 5) <= YEAR; }).length;
+    const c5next = act.map(e => d(e.cat5_latest_report_filed)).filter(x => x && x.getFullYear() >= 1990)
+      .map(x => new Date(x.getFullYear()+5, x.getMonth(), x.getDate())).sort((a,b) => a-b)[0];
     const cat5None = act.filter(e => !e.cat5_latest_report_filed && /elevator/i.test(e.device_type || "")).length;
     add({cat:"Elevator", name:"Elevator CAT1 annual test", law:"1 RCNY §101-07", freq:"Annual",
-         due:`Dec 31, ${YEAR}`, status: cat1Late ? ["warn",`${cat1Late}/${act.length} not yet filed for ${YEAR}`] : ["ok","All devices filed"],
+         due:`Dec 31, ${YEAR}`, dd: cat1Late ? `${YEAR}-12-31` : `${YEAR+1}-12-31`, status: cat1Late ? ["warn",`${cat1Late}/${act.length} not yet filed for ${YEAR}`] : ["ok","All devices filed"],
          note:"Devices listed below", penalty:"$3,000 per device, failure to file"});
     add({cat:"Elevator", name:"Elevator CAT5 5-year test", law:"1 RCNY §101-07", freq:"Every 5 years",
-         due:"5 years from the last CAT5", status: cat5Due ? ["bad",`${cat5Due} device(s) due/overdue`] : cat5None ? ["warn",`${cat5None} elevator(s) with no CAT5 on record`] : ["ok","None due this year"],
+         due: c5next ? `Earliest device due ${ds(c5next)}` : "5 years from the last CAT5", dd: c5next || null, status: cat5Due ? ["bad",`${cat5Due} device(s) due/overdue`] : cat5None ? ["warn",`${cat5None} elevator(s) with no CAT5 on record`] : ["ok","None due this year"],
          note:"Lifts, escalators and dumbwaiters often have no CAT5 record", penalty:"$5,000 per device, failure to file"});
     add({cat:"Elevator", name:"Elevator periodic inspection", law:"1 RCNY §101-07", freq:"Annual (Jan 1–Dec 31)",
-         due:`Dec 31, ${YEAR}`, status:["info",`${act.length} active device(s)`], note:"", penalty:"$1,000 per device"});
+         due:`Dec 31, ${YEAR}`, dd:`${YEAR}-12-31`, status:["info",`${act.length} active device(s)`], note:"", penalty:"$1,000 per device"});
   }
 
-  // Boilers
+  // Boilers (low pressure: 1 inspection/yr; high pressure: internal + external, ~6 months apart)
   if ((r.boiler || []).length) {
-    const byId = {}; r.boiler.forEach(b => { if (!byId[b.boiler_id]) byId[b.boiler_id] = b; });
-    const ids = Object.values(byId), stale = ids.filter(b => (d(b.inspection_date)?.getFullYear() || 0) < YEAR).length;
-    add({cat:"Boiler", name:"Boiler annual inspection", law:"Admin Code §28-303", freq:"Annual",
-         due:`Dec 31, ${YEAR} (file within 14 days of inspection)`, status: stale ? ["warn",`${stale}/${ids.length} not yet inspected in ${YEAR}`] : ["ok","Filed this year"],
-         note:"", penalty:"$1,000 per boiler, failure to file"});
+    const byId = {}; r.boiler.forEach(b => { (byId[b.boiler_id] ||= []).push(b); });
+    const lp = [], hp = [];
+    Object.entries(byId).forEach(([id, rows]) => (/high/i.test(rows[0].pressure_type || "") ? hp : lp).push({id, rows}));
+    const thisYear = rows => rows.filter(b => d(b.inspection_date)?.getFullYear() === YEAR);
+    if (lp.length) {
+      const stale = lp.filter(b => !thisYear(b.rows).length).length;
+      add({cat:"Boiler", name:"Low-pressure boiler annual inspection", law:"1 RCNY §103-01", freq:"Annual",
+           due:`Dec 31, ${YEAR} (file within 14 days of inspection)`, dd: stale ? `${YEAR}-12-31` : `${YEAR+1}-12-31`, status: stale ? ["warn",`${stale}/${lp.length} not yet inspected in ${YEAR}`] : ["ok","Filed this year"],
+           note:"", penalty:"$1,000 per boiler, failure to file"});
+    }
+    if (hp.length) {
+      const missing = hp.map(b => { const t = thisYear(b.rows).map(x => (x.inspection_type || "").toLowerCase());
+        return (t.some(x => x.includes("internal")) ? 0 : 1) + (t.some(x => x.includes("external")) ? 0 : 1); }).reduce((a,b) => a+b, 0);
+      add({cat:"Boiler", name:"High-pressure boiler inspections (internal + external)", law:"1 RCNY §103-05", freq:"2× per year, ~6 months apart",
+           due:`Dec 31, ${YEAR} (each filed within 14 days)`, dd: missing ? `${YEAR}-12-31` : `${YEAR+1}-12-31`, status: missing ? ["warn",`${missing} of ${hp.length*2} inspections not filed for ${YEAR}`] : ["ok","Both inspections filed"],
+           note:"Performed by an insurance-company inspector", penalty:"$1,000 per boiler per inspection type"});
+    }
   } else add({cat:"Boiler", name:"Boiler annual inspection", law:"Admin Code §28-303", freq:"Annual", due:"—",
               status:["na","No boiler filings on record"], note:"Applies if the building has a regulated boiler (1–2 family residential boilers are exempt)"});
 
+  // DEP boiler / equipment registration (CATS) + LL32 No. 4 oil phase-out
+  const catsCur = (r.cats || []).filter(c => c.status === "CURRENT");
+  if (catsCur.length) {
+    const soon = catsCur.filter(c => { const n = daysTo(d(c.expirationdate)); return n != null && n < 120; });
+    const expired = (r.cats || []).filter(c => c.status === "EXPIRED" && !catsCur.some(k => k.make === c.make && k.model === c.model)).length;
+    add({cat:"Boiler", name:"DEP equipment registration / certificate to operate (CATS)", law:"Admin Code §24-109", freq:"Every 3 years",
+         due: soon.length ? `${soon.length} expire by ${ds(soon[0].expirationdate)}` : `Next expiry ${ds(catsCur.map(c=>c.expirationdate).sort()[0])}`,
+         dd: catsCur.map(c => c.expirationdate).sort()[0]?.slice(0,10),
+         status: soon.length ? ["bad",`${soon.length} expiring within 120 days`] : ["ok",`${catsCur.length} current`],
+         note: expired ? `${expired} older registration(s) show as expired` : "", penalty:"DEP/ECB violation for operating unregistered equipment"});
+    const no4 = catsCur.filter(c => /NO4/i.test((c.primaryfuel||"") + (c.secondaryfuel||"")));
+    add({cat:"Boiler", name:"No. 4 fuel oil phase-out (LL32/2023)", law:"Admin Code §24-168", freq:"One-time",
+         due:"Jul 1, 2027", dd: no4.length ? "2027-07-01" : null, status: no4.length ? ["bad",`${no4.length} unit(s) registered for No. 4 oil`] : ["ok","No No. 4 oil equipment"],
+         note: no4.length ? "Convert burner/fuel before the ban; conversion needs DOB + DEP permits" : "", penalty:"DEP violations; equipment can't be re-registered"});
+  }
+
+  // Cooling towers (LL77/2015)
+  if ((r.towers || []).length) {
+    const lastSample = r.towers.flatMap(t => (t.sampledates || "").split(",").map(x => d(x.trim()))).filter(Boolean).sort((a,b) => b-a)[0];
+    const age = lastSample ? -daysTo(lastSample) : null;
+    const lastInsp = (r.towerInsp || [])[0];
+    add({cat:"Water", name:"Cooling tower Legionella sampling (LL77)", law:"24 RCNY Health Code Art. 8", freq:"Every 90 days",
+         due: lastSample ? `Next by ${ds(new Date(+lastSample + 90*864e5))}` : "—", dd: lastSample ? new Date(+lastSample + 90*864e5) : TODAY,
+         status: age == null ? ["bad","No sample dates on record"] : age > 90 ? ["bad",`Last sample ${age} days ago`] : age > 75 ? ["warn",`Last sample ${age} days ago`] : ["ok",`Sampled ${age} days ago`],
+         note:`${r.towers.length} registered system(s)`, penalty:"$1,000–$10,000 per violation (DOHMH)"});
+    add({cat:"Water", name:"Cooling tower annual certification & registration renewal", law:"Admin Code §28-317", freq:"Annual",
+         due: ds(nextAnnual(11,1)), dd: nextAnnual(11,1), status:["info","Certify by a qualified person; renew registration"],
+         note: lastInsp ? `Last DOHMH inspection: ${ds(lastInsp.inspection_date)} (${lastInsp.inspection_type})` : "No DOHMH inspections on record", penalty:""});
+  }
+
   // Residential (HPD)
   if (units >= 3) {
-    add({cat:"Housing", name:"HPD property registration", law:"HMC §27-2097", freq:"Annual", due:`Sep 1, ${YEAR}`, status:["info","Required (3+ units)"], note:"", penalty:"Can't certify violations or bring nonpayment cases"});
+    add({cat:"Housing", name:"HPD property registration", law:"HMC §27-2097", freq:"Annual", due: ds(nextAnnual(9,1)), dd: nextAnnual(9,1), status:["info","Required (3+ units)"], note:"", penalty:"Can't certify violations or bring nonpayment cases"});
     add({cat:"Housing", name:"Indoor allergen inspection (LL55)", law:"Admin Code §27-2017", freq:"Annual", due:"Annual unit inspections", status:["info","Required"], note:"Pests and mold", penalty:""});
     if (built && built < 1960) add({cat:"Housing", name:"Lead paint: annual inspection + XRF (LL1/LL31)", law:"Admin Code §27-2056", freq:"Annual; XRF by Aug 9, 2025",
-         due:"Annual notice by Jan 16", status:["warn","Pre-1960 building: lead rules apply"], note:`Built ${built}`, penalty:""});
+         due:"Annual notice by Jan 16", dd: nextAnnual(1,16), status:["warn","Pre-1960 building: lead rules apply"], note:`Built ${built}`, penalty:""});
+  }
+  // LL126 parapets (annual) + parking structures (6-year cycle)
+  if (!oneTwoFamily) add({cat:"Structural", name:"Annual parapet observation (LL126/2021)", law:"1 RCNY §103-15", freq:"Annual",
+       due:`Dec 31, ${YEAR}`, dd:`${YEAR}-12-31`, status:["info","Required if parapets front a public way"], note:"Keep reports 6 years; file with DOB only if unsafe", penalty:"$1,250+ per violation"});
+  const garage = num(p.garagearea) > 0 || /^G/.test(cls);
+  if (garage) {
+    const b = r.g.bbl[0], grp = b === "1" && cd <= 7 ? ["1A","2022","2023"] : (b === "1" || b === "3") ? ["1B","2024","2025"] : ["1C","2026","2027"];
+    let end = +grp[2]; while (end < YEAR) end += 6;
+    add({cat:"Structural", name:"Parking structure periodic inspection (LL126)", law:"Admin Code §28-323", freq:"Every 6 years",
+         due:`Dec 31, ${end} (sub-cycle ${grp[0]})`, dd:`${end}-12-31`, status: end === YEAR ? ["bad","Due this year"] : end - YEAR === 1 ? ["warn",`Filing window open, due ${end}`] : ["info",`Next due ${end}`],
+         note:`Garage area ${fmt(num(p.garagearea))} sf; QPSI inspection + annual observation`, penalty:"$1,000/month late filing"});
+  }
+  // LL157 gas detectors
+  if (units > 0) {
+    const n = daysTo(new Date("2027-01-01"));
+    add({cat:"Gas", name:"Natural gas detectors in dwelling units (LL157)", law:"Admin Code §27-2045", freq:"One-time + maintenance",
+         due:"Jan 1, 2027", dd:"2027-01-01", status: n > 0 ? (n < 180 ? ["bad",`${n} days left`] : ["warn",`${n} days left`]) : ["warn","Deadline passed: verify installation"],
+         note:"Applies where units have gas appliances", penalty:"HPD/DOB violations"});
+  }
+  // LL33/95 energy grade
+  if (area > 25000) {
+    const sc = num(r.ll84?.energy_star_score);
+    const gr = sc == null ? null : sc >= 85 ? "A" : sc >= 70 ? "B" : sc >= 55 ? "C" : "D";
+    add({cat:"Energy", name:"Energy grade label posting (LL33/LL95)", law:"Admin Code §28-309.12", freq:"Annual",
+         due: ds(nextAnnual(10,31)), dd: nextAnnual(10,31), status: gr ? [gr === "D" ? "warn" : "ok", `Estimated grade ${gr} (score ${sc})`] : ["warn","No score: grade F if not benchmarked"],
+         note:"Post near each public entrance", penalty:"$1,250 for failure to post"});
   }
   add({cat:"Water", name:"Backflow prevention device test", law:"15 RCNY §20-04", freq:"Annual", due:"Annual (DEP GEN-215B)", status:["info","If the building has a backflow device"], note:"", penalty:""});
   add({cat:"Fire", name:"Sprinkler/standpipe & fire alarm inspections", law:"NYC Fire Code", freq:"Varies (monthly–5 years)", due:"Per FDNY schedule", status:["info","If equipped"], note:"", penalty:""});
   return out;
+}
+
+function buildViol(r) {
+  return [
+    ...(r.dobViol||[]).map(v => ({src:"DOB", date:v.issue_date, type:(v.violation_type||"").split(/\s{2,}/)[0], desc:v.description || v.violation_type_code + " violation (no description in BIS; see DOB BIS)", id:v.number, extra:""})),
+    ...(r.safety||[]).map(v => ({src:"DOB NOW Safety", date:v.violation_issue_date, type:v.device_type, desc:v.violation_remarks, id:v.violation_number, extra:""})),
+    ...(r.hpd||[]).map(v => ({src:"HPD", date:v.inspectiondate, type:"Class " + v.class, desc:v.novdescription, id:v.violationid, extra:v.currentstatus})),
+    ...(r.compl||[]).map(v => ({src:"DOB Complaint", date:v.date_entered, type:"Category " + v.complaint_category, desc:"Open complaint", id:v.complaint_number, extra:""})),
+  ].sort((a,b) => (d(b.date)||0) - (d(a.date)||0));
+}
+function buildFines(r) {
+  const oathIds = new Set((r.oath||[]).map(o => o.ticket_number));
+  const FINES = [
+    ...(r.oath||[]).map(o => ({id:o.ticket_number, date:o.violation_date, agency:o.issuing_agency, charge:o.charge_1_code_description || o.charge_1_code_section,
+       status:o.hearing_status, hearing:o.hearing_date, imposed:+o.penalty_imposed||0, paid:+o.paid_amount||0, bal:+o.balance_due||0, comp:o.compliance_status})),
+    ...(r.ecb||[]).filter(v => !oathIds.has(v.ecb_violation_number)).map(v => ({id:v.ecb_violation_number, date:v.issue_date, agency:"DOB (ECB)", charge:v.violation_description,
+       status:v.hearing_status || v.ecb_violation_status, hearing:v.hearing_date, imposed:+v.penality_imposed||0, paid:+v.amount_paid||0, bal:+v.balance_due||0, comp:v.certification_status})),
+  ].sort((a,b) => (d(b.date)||0) - (d(a.date)||0));
+  return FINES;
 }
 
 /* ---------- Render ---------- */
@@ -243,21 +464,20 @@ let VIOL = [];
 function render(r) {
   const p = r.pluto || {}, g = r.g, reqs = rules(r);
   const na = x => x == null ? " (source unavailable)" : "";
-  VIOL = [
-    ...(r.dobViol||[]).map(v => ({src:"DOB", date:v.issue_date, type:(v.violation_type||"").split(/\s{2,}/)[0], desc:v.description || v.violation_type_code + " violation (no description in BIS; see DOB BIS)", id:v.number, extra:""})),
-    ...(r.ecb||[]).map(v => ({src:"ECB/OATH", date:v.issue_date, type:v.violation_type, desc:v.violation_description, id:v.ecb_violation_number, extra:v.balance_due>0?`Balance due ${money(+v.balance_due)}`:v.severity})),
-    ...(r.safety||[]).map(v => ({src:"DOB NOW Safety", date:v.violation_issue_date, type:v.device_type, desc:v.violation_remarks, id:v.violation_number, extra:""})),
-    ...(r.hpd||[]).map(v => ({src:"HPD", date:v.inspectiondate, type:"Class " + v.class, desc:v.novdescription, id:v.violationid, extra:v.currentstatus})),
-    ...(r.compl||[]).map(v => ({src:"DOB Complaint", date:v.date_entered, type:"Category " + v.complaint_category, desc:"Open complaint", id:v.complaint_number, extra:""})),
-  ].sort((a,b) => (d(b.date)||0) - (d(a.date)||0));
-  const ecbBal = (r.ecb||[]).reduce((s,v) => s + (+v.balance_due || 0), 0);
+  VIOL = buildViol(r);
+  const FINES = buildFines(r);
+  const ecbBal = FINES.reduce((s,v) => s + v.bal, 0);
+  const upcoming = FINES.filter(f => { const n = daysTo(d(f.hearing)); return n != null && n >= 0; });
+  const sheds = (r.permits||[]).filter(p => /shed|scaffold|fence/i.test(p.work_type||""));
   const dueNow = reqs.filter(x => x.status[0] === "bad").length, warn = reqs.filter(x => x.status[0] === "warn").length;
   const elev = (r.elev||[]).filter(e => /active/i.test(e.device_status||""));
   const cats = [...new Set(VIOL.map(v => v.src))];
 
   $("#out").innerHTML = `
   <div class="card">
-    <h2>${esc(g.label.replace(", USA",""))}</h2>
+    <div class="titlebar"><h2>${esc(g.label.replace(", USA",""))}</h2>
+      <div class="noprint" style="display:flex;gap:8px"><button class="btn sm light" id="icsone">Export deadlines (.ics)</button>
+      <button class="btn sm" id="addp">${inPortfolio(g.bin) ? "✓ In portfolio" : "+ Add to portfolio"}</button></div></div>
     <p class="sub">${esc(g.borough)} · ZIP ${esc(g.zip)} · BIN ${esc(g.bin)} · BBL ${esc(g.bbl)} ·
       <a href="https://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?bin=${g.bin}" target="_blank">DOB BIS</a> ·
       <a href="https://hpdonline.nyc.gov/hpdonline/" target="_blank">HPD Online</a></p>
@@ -278,8 +498,9 @@ function render(r) {
     <div class="kpi ${dueNow?"bad":"ok"}"><b>${dueNow}</b><span>Requirements due now / overdue</span></div>
     <div class="kpi ${warn?"warn":"ok"}"><b>${warn}</b><span>Need attention</span></div>
     <div class="kpi ${VIOL.length?"bad":"ok"}"><b>${VIOL.length}</b><span>Open violations & complaints</span></div>
-    <div class="kpi ${ecbBal?"bad":"ok"}"><b>${money(ecbBal)}</b><span>ECB/OATH balance due</span></div>
-    <div class="kpi"><b>${elev.length}</b><span>Active elevator devices</span></div>
+    <div class="kpi ${ecbBal?"bad":"ok"}"><b>${money(ecbBal)}</b><span>Unpaid fines (OATH/ECB)</span></div>
+    <div class="kpi ${upcoming.length?"warn":"ok"}"><b>${upcoming.length}</b><span>Upcoming OATH hearings</span></div>
+    <div class="kpi"><b>${(r.permits||[]).length}</b><span>Active permits${sheds.length ? ` · ${sheds.length} shed/scaffold` : ""}</span></div>
   </div>
 
   <div class="card">
@@ -292,12 +513,52 @@ function render(r) {
 
   <div class="card">
     <h3>Open violations & complaints (${VIOL.length})</h3>
-    <p class="src">Sources: DOB${na(r.dobViol)}, ECB/OATH${na(r.ecb)}, DOB NOW Safety${na(r.safety)}, HPD${na(r.hpd)}, DOB Complaints${na(r.compl)}</p>
+    <p class="src">Sources: DOB${na(r.dobViol)}, DOB NOW Safety${na(r.safety)}, HPD${na(r.hpd)}, DOB Complaints${na(r.compl)}</p>
     ${VIOL.length ? `<div class="tabs" id="vt"><button class="tab on" data-s="">All (${VIOL.length})</button>
       ${cats.map(c => `<button class="tab" data-s="${esc(c)}">${esc(c)} (${VIOL.filter(v=>v.src===c).length})</button>`).join("")}</div>
       <div class="scroll"><table><thead><tr><th>Date</th><th>Source</th><th>Type</th><th>Description</th><th>Status / #</th></tr></thead><tbody id="vb"></tbody></table></div>`
       : `<p>${chip("ok","No open violations found")}</p>`}
   </div>
+
+  <div class="card">
+    <h3>Fines & hearings: OATH / ECB (${FINES.length} open)</h3>
+    <p class="src">All agencies (DOB, FDNY, DEP, DSNY, DOHMH…) adjudicated at OATH${na(r.oath)}. Unpaid balance ${money(ecbBal)}${upcoming.length ? ` · next hearing ${ds(upcoming.sort((a,b)=>d(a.hearing)-d(b.hearing))[0].hearing)}` : ""}.</p>
+    ${FINES.length ? `<div class="scroll"><table><thead><tr><th>Issued</th><th>Agency</th><th>Charge</th><th>Hearing</th><th>Status</th><th>Imposed</th><th>Balance</th></tr></thead><tbody>
+    ${FINES.map(f => { const n = daysTo(d(f.hearing));
+      return `<tr><td style="white-space:nowrap">${ds(f.date)}</td><td>${esc(f.agency)}</td><td>${esc(f.charge)}<div class="law">#${esc(f.id)}${f.comp ? " · " + esc(f.comp) : ""}</div></td>
+      <td style="white-space:nowrap">${ds(f.hearing)}${n != null && n >= 0 ? "<br>" + chip(n < 14 ? "bad" : "warn", `in ${n} days`) : ""}</td>
+      <td>${chip(/DEFAULT/.test(f.status||"") ? "bad" : /DOCKET|RESCHED|NEW/.test(f.status||"") ? "warn" : "na", f.status || "—")}</td>
+      <td>${money(f.imposed)}</td><td>${f.bal ? `<b style="color:var(--bad)">${money(f.bal)}</b>` : "$0"}</td></tr>`}).join("")}
+    </tbody></table></div>` : `<p>${chip("ok","No open fines or pending hearings")}</p>`}
+  </div>
+
+  ${(r.towers||[]).length ? `<div class="card"><h3>Cooling towers (${r.towers.length} registered)</h3><table>
+    <thead><tr><th>System ID</th><th>Registered</th><th>Active equipment</th><th>Recent Legionella samples</th><th>Last DOHMH inspection</th></tr></thead><tbody>
+    ${r.towers.map(t => { const i = (r.towerInsp||[]).find(x => x.system_id === t.system_id);
+      const sm = (t.sampledates||"").split(",").map(x => x.trim()).filter(Boolean);
+      return `<tr><td>${esc(t.system_id)}</td><td>${ds(t.date_registered)}</td><td>${esc(t.activeequipment)}</td>
+        <td>${sm.slice(0,4).map(esc).join(" · ") || "—"}</td><td>${i ? ds(i.inspection_date) + " · " + esc(i.inspection_type) : "—"}</td></tr>`}).join("")}
+    </tbody></table></div>` : ""}
+
+  <div class="card">
+    <h3>Active DOB permits (${(r.permits||[]).length})</h3>
+    <p class="src">DOB NOW permits currently issued and not expired${na(r.permits)}.${r.co ? ` Latest certificate of occupancy: ${esc(r.co.c_of_o_number)} (${esc(r.co.c_of_o_filing_type)}), ${esc(r.co.c_of_o_status)} ${esc((r.co.c_of_o_issuance_date||"").split(" ")[0])}.` : ""}</p>
+    ${(r.permits||[]).length ? `<div class="scroll"><table><thead><tr><th>Permit</th><th>Work type</th><th>Description</th><th>Issued</th><th>Expires</th></tr></thead><tbody>
+    ${r.permits.map(p => { const n = daysTo(d(p.expired_date));
+      return `<tr><td>${esc(p.work_permit)}<div class="law">${esc(p.work_on_floor || "")}</div></td>
+      <td>${/shed|scaffold|fence/i.test(p.work_type||"") ? chip("warn", p.work_type) : esc(p.work_type)}</td>
+      <td>${esc((p.job_description||"").slice(0,160))}<div class="law">${esc(p.applicant_business_name || "")}</div></td>
+      <td style="white-space:nowrap">${ds(p.issued_date)}</td><td style="white-space:nowrap">${ds(p.expired_date)}${n < 30 ? "<br>" + chip("bad", `${n} days`) : ""}</td></tr>`}).join("")}
+    </tbody></table></div>` : `<p>${chip("na","No active permits")}</p>`}
+  </div>
+
+  ${(r.cats||[]).filter(c=>c.status==="CURRENT").length ? `<div class="card"><h3>DEP equipment registrations (CATS)</h3><table>
+    <thead><tr><th>Application</th><th>Type</th><th>Equipment</th><th>Fuel</th><th>Issued</th><th>Expires</th></tr></thead><tbody>
+    ${r.cats.filter(c=>c.status==="CURRENT").map(c => { const n = daysTo(d(c.expirationdate));
+      return `<tr><td>${esc(c.applicationid)}</td><td>${esc(c.requesttype)}</td><td>${esc([c.make,c.model].filter(Boolean).join(" "))}<div class="law">${esc(c.premisename||"")}</div></td>
+      <td>${/NO4/.test((c.primaryfuel||"")+(c.secondaryfuel||"")) ? chip("bad", [c.primaryfuel,c.secondaryfuel].filter(Boolean).join(" / ")) : esc([c.primaryfuel,c.secondaryfuel].filter(Boolean).join(" / "))}</td>
+      <td>${ds(c.issuedate)}</td><td>${ds(c.expirationdate)}${n < 120 ? "<br>" + chip(n < 0 ? "bad" : "warn", n < 0 ? "expired" : `${n} days`) : ""}</td></tr>`}).join("")}
+    </tbody></table></div>` : ""}
 
   ${elev.length ? `<div class="card"><h3>Elevator devices (${elev.length} active)</h3><div class="scroll"><table>
     <thead><tr><th>Device</th><th>Type</th><th>Last CAT1</th><th>Last CAT5</th><th>CAT5 due</th><th>Last periodic</th></tr></thead><tbody>
@@ -325,6 +586,10 @@ function render(r) {
   </div></div>` : ""}
   <p class="src">Checked ${NOW.toLocaleString()}. Violation data can lag agency systems by 1–7 days.</p>`;
 
+  CURRENT = { r, reqs, VIOL: VIOL.slice(), FINES };
+  $("#addp").onclick = () => { if (!inPortfolio(g.bin)) { upsertBuilding(r, reqs); $("#addp").textContent = "✓ In portfolio"; } else location.hash = "#/portfolio"; };
+  $("#icsone").onclick = () => downloadICS(buildEvents(r, reqs, FINES).map(e => ({...e, bname: g.label.replace(", USA","")})), "deadlines-" + g.bin + ".ics");
+  if (inPortfolio(g.bin)) upsertBuilding(r, reqs, true);   // keep portfolio snapshot fresh
   drawViol("");
   document.querySelectorAll("#vt .tab").forEach(b => b.onclick = () => {
     document.querySelectorAll("#vt .tab").forEach(x => x.classList.remove("on")); b.classList.add("on"); drawViol(b.dataset.s); });
@@ -339,15 +604,352 @@ function drawViol(src) {
 async function run(addr) {
   if (!addr.trim()) return;
   const btn = $("#go"); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
-  $("#out").innerHTML = `<div class="card">Looking up <b>${esc(addr)}</b> across 11 NYC datasets…</div>`;
-  history.replaceState(null, "", "?a=" + encodeURIComponent(addr));
+  $("#out").innerHTML = `<div class="card">Looking up <b>${esc(addr)}</b> across 17 NYC datasets…</div>`;
+  history.replaceState(null, "", "?a=" + encodeURIComponent(addr) + "#/check");
   try { render(await lookup(addr)); }
   catch (e) { $("#out").innerHTML = `<div class="err">${esc(e.message)}</div>`; }
   finally { btn.disabled = false; btn.textContent = "Check building"; }
 }
+
+/* =====================================================================
+   PORTFOLIO + CALENDAR (stored in localStorage)
+   ===================================================================== */
+let CURRENT = null;
+const LS = "nyccc.portfolio.v1";
+const loadP = () => { try { return JSON.parse(localStorage.getItem(LS)) || []; } catch { return []; } };
+const saveP = list => { localStorage.setItem(LS, JSON.stringify(list)); $("#pcount").textContent = list.length; };
+const inPortfolio = bin => loadP().some(b => b.bin === bin);
+const shortLabel = g => g.label.split(",")[0];
+
+function summarize(r, reqs, VIOLS, FINES) {
+  const p = r.pluto || {};
+  const dueNow = reqs.filter(x => x.status[0] === "bad").length, warn = reqs.filter(x => x.status[0] === "warn").length;
+  const fines = FINES.reduce((s, f) => s + f.bal, 0);
+  const hearings = FINES.filter(f => { const n = daysTo(d(f.hearing)); return n != null && n >= 0; }).length;
+  const unsafe = (r.fisp || []).some(f => String(f.cycle) === "10" && /UNSAFE/.test(f.current_status || ""));
+  const hpdC = (r.hpd || []).filter(v => v.class === "C").length;
+  const sheds = (r.permits || []).filter(x => /shed|scaffold|fence/i.test(x.work_type || "")).length;
+  const risk = Math.min(100, Math.round(dueNow * 14 + warn * 5 + Math.min(VIOLS.length, 60) * 0.5 + hpdC * 0.5 +
+                 Math.min(20, fines / 1000) + hearings * 2 + (unsafe ? 20 : 0)));
+  const next = reqs.filter(x => x.dd && x.status[0] !== "na").sort((a, b) => a.dd - b.dd)[0];
+  return { risk, dueNow, warn, viol: VIOLS.length, hpdC, fines, hearings, permits: (r.permits || []).length, sheds, unsafe,
+           floors: num(p.numfloors), area: num(p.bldgarea), units: num(p.unitsres), owner: p.ownername || "",
+           next: next ? { date: iso(next.dd), name: next.name } : null };
+}
+
+function buildEvents(r, reqs, FINES) {
+  const ev = [];
+  reqs.filter(x => x.dd && x.status[0] !== "na").forEach(x =>
+    ev.push({ date: iso(x.dd), title: x.name, cat: x.cat, law: x.law, status: x.status, note: x.due, penalty: x.penalty || "", kind: "deadline" }));
+  FINES.forEach(f => { const h = d(f.hearing); if (h && daysTo(h) >= 0)
+    ev.push({ date: iso(h), title: `OATH hearing: ${f.charge || "violation"}`, cat: "Hearing", law: `${f.agency} #${f.id}`,
+              status: [daysTo(h) < 14 ? "bad" : "warn", f.status || "Scheduled"], note: f.bal ? `Balance ${money(f.bal)}` : "", penalty: "", kind: "hearing" }); });
+  (r.permits || []).forEach(p => { const x = d(p.expired_date); if (x && daysTo(x) <= 120)
+    ev.push({ date: iso(x), title: `Permit expires: ${p.work_type}`, cat: "Permit", law: p.work_permit,
+              status: [daysTo(x) < 30 ? "bad" : "warn", "Renew or sign off"], note: (p.job_description || "").slice(0, 120), penalty: "", kind: "permit" }); });
+  return ev;
+}
+
+function upsertBuilding(r, reqs, quiet, name) {
+  const VIOLS = buildViol(r), FINES = buildFines(r);
+  const list = loadP(), i = list.findIndex(b => b.bin === r.g.bin), prev = i >= 0 ? list[i] : {};
+  const entry = { bin: r.g.bin, bbl: r.g.bbl, borough: r.g.borough, label: shortLabel(r.g), addr: prev.addr || r.g.label.replace(", USA", ""),
+                  name: name || prev.name || "", added: prev.added || iso(TODAY), checked: new Date().toISOString(),
+                  summary: summarize(r, reqs, VIOLS, FINES), events: buildEvents(r, reqs, FINES) };
+  if (i >= 0) list[i] = entry; else list.push(entry);
+  saveP(list);
+  if (!quiet && VIEW === "portfolio") drawPortfolio();
+  return entry;
+}
+
+async function addAddress(addr, name) {
+  const r = await lookup(addr);
+  return upsertBuilding(r, rules(r), true, name);
+}
+
+/* ---------- Portfolio view ---------- */
+let PSORT = { k: "risk", dir: -1 }, BUSY = null;
+const riskColor = v => v >= 60 ? "var(--bad)" : v >= 30 ? "#c48a2a" : "var(--blue)";
+
+function drawPortfolio() {
+  const list = loadP();
+  $("#pcount").textContent = list.length;
+  if (!list.length) {
+    $("#pout").innerHTML = (BUSY ? `<div class="progress">${BUSY}</div>` : "") + `<div class="card empty"><b>No buildings yet</b>
+      Add an address above, import a CSV (one address per line, optional <code>address,name</code> header), or use “+ Add to portfolio” on any building check.
+      <div style="margin-top:16px"><button class="btn sm light" id="pdemo">Load 4 sample buildings</button></div></div>`;
+    const dm = $("#pdemo"); if (dm) dm.onclick = () => importAddresses([["350 5th Ave, Manhattan","Empire State Building"],["280 Park Ave South, Manhattan","280 PAS"],
+        ["1520 Sedgwick Ave, Bronx","Sedgwick"],["56 North Moore St, Manhattan","N Moore Garage"]]);
+    return;
+  }
+  const S = b => b.summary || {};
+  const tot = list.reduce((a, b) => ({ due: a.due + (S(b).dueNow||0), viol: a.viol + (S(b).viol||0), fines: a.fines + (S(b).fines||0), hear: a.hear + (S(b).hearings||0), unsafe: a.unsafe + (S(b).unsafe?1:0) }),
+                          { due: 0, viol: 0, fines: 0, hear: 0, unsafe: 0 });
+  const in30 = list.flatMap(b => b.events || []).filter(e => { const n = daysTo(fromIso(e.date)); return n >= 0 && n <= 30; }).length;
+  const key = { risk: b => S(b).risk, name: b => (b.name || b.label).toLowerCase(), due: b => S(b).dueNow, warn: b => S(b).warn, viol: b => S(b).viol,
+                fines: b => S(b).fines, hear: b => S(b).hearings, next: b => S(b).next?.date || "9999", checked: b => b.checked };
+  const rows = list.slice().sort((a, b) => { const x = key[PSORT.k](a), y = key[PSORT.k](b); return (x > y ? 1 : x < y ? -1 : 0) * PSORT.dir; });
+  const th = (k, t) => `<th class="sort ${PSORT.k === k ? "on" : ""}" data-k="${k}">${t}${PSORT.k === k ? (PSORT.dir < 0 ? " ▼" : " ▲") : ""}</th>`;
+  $("#pout").innerHTML = (BUSY ? `<div class="progress">${BUSY}</div>` : "") + `
+  <div class="kpis">
+    <div class="kpi"><b>${list.length}</b><span>Buildings</span></div>
+    <div class="kpi ${tot.due ? "bad" : "ok"}"><b>${tot.due}</b><span>Requirements due / overdue</span></div>
+    <div class="kpi ${in30 ? "warn" : "ok"}"><b>${in30}</b><span>Deadlines & hearings in 30 days</span></div>
+    <div class="kpi ${tot.viol ? "bad" : "ok"}"><b>${fmt(tot.viol)}</b><span>Open violations</span></div>
+    <div class="kpi ${tot.fines ? "bad" : "ok"}"><b>${money(tot.fines)}</b><span>Unpaid fines${tot.unsafe ? ` · ${tot.unsafe} UNSAFE facade` : ""}</span></div>
+  </div>
+  <div class="card"><h3>Buildings ranked by risk</h3>
+  <div class="scroll" style="max-height:none"><table><thead><tr>
+    ${th("risk","Risk")}${th("name","Building")}${th("due","Due")}${th("warn","Attention")}${th("viol","Violations")}${th("fines","Unpaid fines")}${th("hear","Hearings")}${th("next","Next deadline")}${th("checked","Checked")}<th></th>
+  </tr></thead><tbody>
+  ${rows.map(b => { const s = S(b), age = (Date.now() - new Date(b.checked)) / 864e5;
+    return `<tr>
+      <td><div class="risk"><b style="font-family:'IBM Plex Mono',monospace;color:${riskColor(s.risk)}">${s.risk ?? "—"}</b><div class="bar"><i style="width:${s.risk||0}%;background:${riskColor(s.risk)}"></i></div></div></td>
+      <td><div class="bname"><a data-open="${esc(b.addr)}">${esc(b.name || b.label)}</a></div><div class="law">${b.name ? esc(b.label) + " · " : ""}${esc(b.borough || "")} · BIN ${esc(b.bin)}${s.floors ? ` · ${s.floors} fl` : ""}${s.area ? ` · ${fmt(s.area)} sf` : ""}</div></td>
+      <td>${s.dueNow ? chip("bad", s.dueNow) : chip("ok", 0)}</td>
+      <td>${s.warn ? chip("warn", s.warn) : chip("ok", 0)}</td>
+      <td>${fmt(s.viol)}${s.hpdC ? `<div class="law">${s.hpdC} HPD class C</div>` : ""}</td>
+      <td>${s.fines ? `<b style="color:var(--bad)">${money(s.fines)}</b>` : "$0"}</td>
+      <td>${s.hearings || "—"}</td>
+      <td>${s.next ? `${ds(s.next.date)}<div class="law">${esc(s.next.name)}</div>` : "—"}</td>
+      <td class="law" style="white-space:nowrap">${age < 1 ? "Today" : Math.floor(age) + "d ago"}${age > 7 ? "<br>" + chip("warn", "stale") : ""}</td>
+      <td style="white-space:nowrap"><button class="iconbtn" data-ref="${esc(b.bin)}" title="Refresh">↻</button>
+          <button class="iconbtn" data-ren="${esc(b.bin)}" title="Rename">✎</button>
+          <button class="iconbtn" data-del="${esc(b.bin)}" title="Remove">✕</button></td></tr>`; }).join("")}
+  </tbody></table></div>
+  <p class="src">Risk score (0–100) weighs overdue requirements, items needing attention, open violations, HPD class C, unpaid fines, upcoming hearings and UNSAFE facades. Click a building for the full report.</p></div>`;
+
+  document.querySelectorAll("#pout th.sort").forEach(t => t.onclick = () => { PSORT = { k: t.dataset.k, dir: PSORT.k === t.dataset.k ? -PSORT.dir : (t.dataset.k === "name" || t.dataset.k === "next" ? 1 : -1) }; drawPortfolio(); });
+  document.querySelectorAll("[data-open]").forEach(a => a.onclick = () => { $("#q").value = a.dataset.open; location.hash = "#/check"; run(a.dataset.open); });
+  document.querySelectorAll("[data-del]").forEach(x => x.onclick = () => { if (confirm("Remove this building from the portfolio?")) { saveP(loadP().filter(b => b.bin !== x.dataset.del)); drawPortfolio(); } });
+  document.querySelectorAll("[data-ren]").forEach(x => x.onclick = () => { const list = loadP(), b = list.find(b => b.bin === x.dataset.ren);
+    const n = prompt("Building name", b.name || b.label); if (n != null) { b.name = n.trim(); saveP(list); drawPortfolio(); } });
+  document.querySelectorAll("[data-ref]").forEach(x => x.onclick = () => { const b = loadP().find(b => b.bin === x.dataset.ref); refreshMany([b]); });
+}
+
+async function pool(items, n, fn) {
+  let i = 0; const next = async () => { while (i < items.length) { const k = i++; await fn(items[k], k); } };
+  await Promise.all(Array.from({ length: Math.min(n, items.length) }, next));
+}
+async function importAddresses(rows) {
+  let done = 0; const fails = [];
+  BUSY = `Adding ${rows.length} building(s)…`; drawPortfolio();
+  await pool(rows, 2, async ([addr, name]) => {
+    try { await addAddress(addr, name); } catch (e) { fails.push(`${addr} (${e.message})`); }
+    BUSY = `Adding buildings… ${++done}/${rows.length}`; drawPortfolio();
+  });
+  BUSY = null; drawPortfolio();
+  if (fails.length) alert("Could not add:\n" + fails.join("\n"));
+}
+async function refreshMany(list) {
+  let done = 0; const fails = [];
+  BUSY = `Refreshing ${list.length} building(s)…`; drawPortfolio();
+  await pool(list, 2, async b => {
+    try { await addAddress(b.addr); } catch (e) { fails.push(b.name || b.label); }
+    BUSY = `Refreshing… ${++done}/${list.length}`; drawPortfolio();
+  });
+  BUSY = null; drawPortfolio();
+  if (fails.length) alert("Refresh failed for:\n" + fails.join("\n"));
+}
+
+function parseCSV(text) {
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) { const c = text[i];
+    if (q) { if (c === '"' && text[i+1] === '"') { cell += '"'; i++; } else if (c === '"') q = false; else cell += c; }
+    else if (c === '"') q = true; else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && text[i+1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += c; }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows.map(r => r.map(x => x.trim())).filter(r => r.some(Boolean));
+}
+function importCSV(text) {
+  let rows = parseCSV(text); if (!rows.length) return;
+  const h = rows[0].map(x => x.toLowerCase());
+  let ai = 0, ni = -1;
+  if (h.some(x => /address|addr|street/.test(x))) { ai = h.findIndex(x => /address|addr|street/.test(x)); ni = h.findIndex(x => /name|building|property/.test(x) && !/address/.test(x)); rows = rows.slice(1); }
+  else if (rows[0].length > 1 && !/\d/.test(rows[0][0])) { ai = 1; ni = 0; }   // "name,address" without header
+  const have = new Set(loadP().map(b => b.addr.toLowerCase()));
+  const list = rows.map(r => [r[ai], ni >= 0 ? r[ni] : ""]).filter(([a]) => a && !have.has(a.toLowerCase()));
+  if (list.length) importAddresses(list);
+}
+function download(name, text, type) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+function exportCSV() {
+  const cols = ["name","address","borough","bin","bbl","risk","due_now","needs_attention","open_violations","hpd_class_c","unpaid_fines","upcoming_hearings","active_permits","next_deadline","next_requirement","last_checked"];
+  const q = v => /[",\n]/.test(String(v ?? "")) ? `"${String(v).replace(/"/g, '""')}"` : (v ?? "");
+  const lines = loadP().map(b => { const s = b.summary || {};
+    return [b.name, b.addr, b.borough, b.bin, b.bbl, s.risk, s.dueNow, s.warn, s.viol, s.hpdC, s.fines, s.hearings, s.permits, s.next?.date, s.next?.name, b.checked].map(q).join(","); });
+  download(`portfolio-${iso(TODAY)}.csv`, [cols.join(","), ...lines].join("\r\n"), "text/csv");
+}
+
+/* ---------- iCalendar export ---------- */
+function downloadICS(events, filename) {
+  if (!events.length) { alert("No dated deadlines to export."); return; }
+  const e = s => String(s || "").replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\r?\n/g, "\\n");
+  const enc = new TextEncoder();
+  const fold = l => { const out = []; let cur = "", n = 0;          // fold at 75 octets (RFC 5545)
+    for (const ch of l) { const b = enc.encode(ch).length; if (n + b > (out.length ? 74 : 75)) { out.push(cur); cur = ""; n = 0; } cur += ch; n += b; }
+    out.push(cur); return out.join("\r\n "); };
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
+  const dt = s => s.replace(/-/g, ""), plus1 = s => { const x = fromIso(s); x.setDate(x.getDate() + 1); return dt(iso(x)); };
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//CompliCheck NYC//Compliance Calendar//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:NYC Compliance Deadlines"];
+  events.forEach((v, i) => {
+    const uid = `${dt(v.date)}-${(v.bin || "x")}-${(v.title + v.law).replace(/[^A-Za-z0-9]/g, "").slice(0, 40)}-${i}@complicheck.nyc`;
+    lines.push("BEGIN:VEVENT", fold(`UID:${uid}`), `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${dt(v.date)}`, `DTEND;VALUE=DATE:${plus1(v.date)}`,
+      fold(`SUMMARY:${e((v.bname ? v.bname + ": " : "") + v.title)}`),
+      fold(`DESCRIPTION:${e([v.cat + " · " + v.law, v.note, v.status?.[1] ? "Status: " + v.status[1] : "", v.penalty ? "Penalty: " + v.penalty : ""].filter(Boolean).join("\n"))}`),
+      fold(`CATEGORIES:${e(v.cat)}`), "TRANSP:TRANSPARENT");
+    if (v.kind !== "hearing") lines.push("BEGIN:VALARM", "ACTION:DISPLAY", fold(`DESCRIPTION:${e(v.title)}`), "TRIGGER:-P30D", "END:VALARM");
+    lines.push("BEGIN:VALARM", "ACTION:DISPLAY", fold(`DESCRIPTION:${e(v.title)}`), "TRIGGER:-P7D", "END:VALARM", "END:VEVENT");
+  });
+  lines.push("END:VCALENDAR");
+  download(filename, lines.join("\r\n") + "\r\n", "text/calendar");
+}
+
+/* ---------- Calendar view ---------- */
+let CF = { b: "", c: "", range: "365", over: true };
+function allEvents() {
+  return loadP().flatMap(b => (b.events || []).map(e => ({ ...e, bin: b.bin, bname: b.name || b.label, addr: b.addr })));
+}
+function filteredEvents() {
+  return allEvents().filter(e => {
+    const n = daysTo(fromIso(e.date));
+    if (CF.b && e.bin !== CF.b) return false;
+    if (CF.c && e.cat !== CF.c) return false;
+    if (n < 0) return CF.over;
+    return CF.range === "all" || n <= +CF.range;
+  }).sort((a, b) => a.date.localeCompare(b.date) || a.bname.localeCompare(b.bname));
+}
+function drawCalendar() {
+  const list = loadP();
+  if (!list.length) { $("#cout").innerHTML = `<div class="card empty"><b>No buildings in your portfolio</b>Add buildings on the <a href="#/portfolio">Portfolio</a> tab to build the calendar.</div>`; return; }
+  const all = allEvents(), cats = [...new Set(all.map(e => e.cat))].sort(), ev = filteredEvents();
+  const months = Array.from({ length: 12 }, (_, i) => new Date(TODAY.getFullYear(), TODAY.getMonth() + i, 1));
+  const inScope = all.filter(e => (!CF.b || e.bin === CF.b) && (!CF.c || e.cat === CF.c));
+  const counts = months.map(m => inScope.filter(e => { const x = fromIso(e.date); return x.getFullYear() === m.getFullYear() && x.getMonth() === m.getMonth(); }).length);
+  const mx = Math.max(1, ...counts);
+  const groups = {};
+  ev.forEach(e => { const x = fromIso(e.date), k = daysTo(x) < 0 ? "0000-overdue" : `${x.getFullYear()}-${pad(x.getMonth()+1)}`; (groups[k] ||= []).push(e); });
+  const over = (groups["0000-overdue"] || []).length;
+  $("#cout").innerHTML = `
+  <div class="card">
+    <div class="filters">
+      <label>Building<select id="cfb"><option value="">All buildings (${list.length})</option>${list.map(b => `<option value="${esc(b.bin)}" ${CF.b === b.bin ? "selected" : ""}>${esc(b.name || b.label)}</option>`).join("")}</select></label>
+      <label>Category<select id="cfc"><option value="">All categories</option>${cats.map(c => `<option ${CF.c === c ? "selected" : ""}>${esc(c)}</option>`).join("")}</select></label>
+      <label>Range<select id="cfr">${[["30","Next 30 days"],["90","Next 90 days"],["365","Next 12 months"],["all","All future"]].map(([v,t]) => `<option value="${v}" ${CF.range === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+      <label class="chk"><input type="checkbox" id="cfo" ${CF.over ? "checked" : ""}> Include overdue${over ? ` (${over})` : ""}</label>
+      <span class="src" style="margin-left:auto">${ev.length} item(s)</span>
+    </div>
+    <div class="strip">${months.map((m, i) => `<a data-m="${m.getFullYear()}-${pad(m.getMonth()+1)}"><small>${m.toLocaleString("en-US", { month: "short" })}${m.getMonth() === 0 || i === 0 ? " " + String(m.getFullYear()).slice(2) : ""}</small><b>${counts[i]}</b><i style="opacity:${counts[i] ? .25 + .75 * counts[i] / mx : 0}"></i></a>`).join("")}</div>
+  </div>
+  ${ev.length ? Object.keys(groups).sort().map(k => {
+    const items = groups[k], isOver = k.startsWith("0000");
+    const title = isOver ? "Overdue" : fromIso(k + "-01").toLocaleString("en-US", { month: "long", year: "numeric" });
+    return `<div class="mhead ${isOver ? "over" : ""}" id="m-${k}"><h4>${title}</h4><span>${items.length} item(s)</span></div>` + items.map(e => {
+      const x = fromIso(e.date), n = daysTo(x);
+      return `<div class="ev"><div class="dbox"><small>${x.toLocaleString("en-US", { month: "short" })}</small><b>${x.getDate()}</b></div>
+        <div><div class="t">${esc(e.title)}</div><div class="b"><a class="bname" style="font-weight:600;color:var(--blue);cursor:pointer" data-open="${esc(e.addr)}">${esc(e.bname)}</a> · ${esc(e.law)}${e.note ? " · " + esc(e.note) : ""}</div></div>
+        <div>${chip(e.kind === "hearing" ? "warn" : e.kind === "permit" ? "na" : "info", e.cat)}</div>
+        <div>${e.status ? chip(e.status[0], e.status[1]) : ""}</div>
+        <div class="left" style="${n < 0 ? "color:var(--bad)" : n <= 30 ? "color:#8a5a12" : ""}">${n < 0 ? `${-n}d overdue` : n === 0 ? "today" : `in ${n}d`}</div></div>`; }).join("");
+  }).join("") : `<div class="card empty"><b>Nothing in this range</b>Try a longer range or clear the filters.</div>`}`;
+  $("#cfb").onchange = e => { CF.b = e.target.value; drawCalendar(); };
+  $("#cfc").onchange = e => { CF.c = e.target.value; drawCalendar(); };
+  $("#cfr").onchange = e => { CF.range = e.target.value; drawCalendar(); };
+  $("#cfo").onchange = e => { CF.over = e.target.checked; drawCalendar(); };
+  document.querySelectorAll(".strip a").forEach(a => a.onclick = () => { if (CF.range !== "all") { CF.range = "all"; drawCalendar(); }
+    const el = document.getElementById("m-" + a.dataset.m); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); });
+  document.querySelectorAll("#cout [data-open]").forEach(a => a.onclick = () => { $("#q").value = a.dataset.open; location.hash = "#/check"; run(a.dataset.open); });
+}
+
+/* ---------- Router & wiring ---------- */
+let VIEW = "check";
+function route() {
+  VIEW = (location.hash.match(/^#\/(\w+)/) || [])[1] || "check";
+  if (!["check","portfolio","calendar"].includes(VIEW)) VIEW = "check";
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("hidden", v.id !== "v-" + VIEW));
+  document.querySelectorAll("nav a.nl").forEach(a => a.classList.toggle("on", a.dataset.v === VIEW));
+  if (VIEW === "portfolio") drawPortfolio();
+  if (VIEW === "calendar") drawCalendar();
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
 $("#f").onsubmit = e => { e.preventDefault(); run($("#q").value); };
 document.querySelectorAll(".hint a").forEach(a => a.onclick = () => { $("#q").value = a.dataset.a; run(a.dataset.a); });
-const pre = new URLSearchParams(location.search).get("a"); if (pre) { $("#q").value = pre; run(pre); }
+$("#padd").onsubmit = e => { e.preventDefault(); const a = $("#paddr").value.trim(); if (!a) return;
+  importAddresses([[a, $("#pname").value.trim()]]); $("#paddr").value = ""; $("#pname").value = ""; };
+$("#pimport").onclick = () => $("#pfile").click();
+$("#pfile").onchange = async e => { const f = e.target.files[0]; if (f) importCSV(await f.text()); e.target.value = ""; };
+$("#prefresh").onclick = () => { const l = loadP(); if (l.length) refreshMany(l); };
+$("#pexport").onclick = () => loadP().length && exportCSV();
+$("#pics").onclick = () => downloadICS(allEvents(), `portfolio-deadlines-${iso(TODAY)}.ics`);
+$("#cics").onclick = () => downloadICS(filteredEvents(), `compliance-calendar-${iso(TODAY)}.ics`);
+$("#pclear").onclick = () => { if (confirm("Remove all buildings from the portfolio?")) { saveP([]); drawPortfolio(); } };
+
+
+/* ---------- Features / roadmap modal (plain-language version of FEATURE-RESEARCH.md) ---------- */
+const ROADMAP_UPDATED = "October 2026";
+const ROADMAP = [
+  { key: "done", label: "Available now", chip: ["ok", "Live"], intro: "Ready to use today. No sign-up needed; data comes live from NYC Open Data.",
+    items: [
+      ["Building compliance check", "Enter any NYC address to see every inspection and filing that applies, its next deadline, status and typical penalty.", "Building check"],
+      ["Facade, energy, gas & elevator rules", "Facade inspections (Local Law 11), energy benchmarking & emissions (LL84/LL97), energy audits (LL87), gas piping (LL152), elevator CAT1/CAT5 tests.", "Building check"],
+      ["Boilers & fuel", "Low- and high-pressure boiler inspections, DEP equipment registrations with expiry warnings, and the No. 4 fuel oil ban (July 2027).", "Building check"],
+      ["Cooling towers", "Registered towers, Legionella sampling dates (flagged if over 90 days) and health department inspections.", "Building check"],
+      ["Parapets, garages, gas detectors & energy grade", "Annual parapet observation, parking garage inspections, gas detectors in apartments (Jan 1, 2027) and an estimated energy grade for the lobby label.", "Building check"],
+      ["Violations & complaints", "Open violations from Buildings, Housing (HPD) and DOB NOW Safety, plus open complaints, with filters by source.", "Building check"],
+      ["Fines & hearings", "Unpaid fines and upcoming OATH hearings from every city agency (Buildings, Fire, DEP, Sanitation, Health and more).", "Building check"],
+      ["Permits & sidewalk sheds", "Active building permits with expiry dates, sheds and scaffolds highlighted, and the latest certificate of occupancy.", "Building check"],
+      ["Portfolio dashboard", "Save all your buildings, see them ranked by a 0–100 risk score, and sort by deadlines, violations or fines. Add by address or import a CSV.", "Portfolio"],
+      ["Compliance calendar", "Every deadline, hearing and permit expiry across your portfolio, by month, with filters by building, category and date range.", "Calendar"],
+      ["Calendar & spreadsheet export", "Send deadlines to Outlook or Google Calendar with 30-day and 7-day reminders, and export your portfolio to CSV.", "Portfolio · Calendar"],
+      ["Printable reports", "Print a clean report for any building, without the menus.", "Print"],
+    ] },
+  { key: "prog", label: "In progress", chip: ["info", "Next"], intro: "What we're building now: automatic monitoring, so you hear about problems without checking manually.",
+    items: [
+      ["Automatic nightly checks", "Every building in your portfolio is re-checked overnight, and anything new is flagged."],
+      ["Email, Slack & text alerts", "Get told right away about new violations, complaints, hearings or facade status changes."],
+      ["Alerts sent to the right person", "Send each type to the right person: building issues to the super, fines to legal, energy to sustainability. Urgent items go out immediately."],
+      ["311 early warning", "See tenant and neighbor 311 complaints before they turn into violations."],
+      ["Shared team portfolio", "Your portfolio saved online so the whole team sees the same buildings on any computer."],
+    ] },
+  { key: "plan", label: "Planned", chip: ["na", "Later"], intro: "Larger features for property management teams, being prioritized based on feedback.",
+    items: [
+      ["Carbon penalty estimator (LL97)", "Estimate yearly emissions fines now and under the stricter 2030 limits, so you can plan upgrades."],
+      ["Tasks & work orders", "Turn any violation or deadline into an assigned task with a due date, vendor, status and notes."],
+      ["Document vault", "Store inspection reports, certificates and filing receipts per building, with expiry tracking."],
+      ["Vendor directory", "Keep your inspectors and contractors on file per building, and notify them when a filing window opens."],
+      ["Owner & board reports", "Monthly PDF summaries per building or portfolio: what's new, what's closed and what's due in the next 90 days."],
+      ["Violation explainer", "Plain-English meaning of each violation code, how to fix it and how to certify the correction."],
+      ["Property software integrations", "Sync buildings with Yardi, AppFolio or MRI, plus single sign-on for larger teams."],
+    ] },
+];
+function drawFeatures() {
+  const n = k => ROADMAP.find(s => s.key === k).items.length, tot = ROADMAP.reduce((a, s) => a + s.items.length, 0);
+  const col = { done: "var(--ok)", prog: "var(--blue)", plan: "#c3ccd6" }, icon = { done: "✓", prog: "◐", plan: "○" };
+  $("#featbody").innerHTML = `
+    <div class="fbar">${ROADMAP.map(s => `<i style="width:${s.items.length / tot * 100}%;background:${col[s.key]}"></i>`).join("")}</div>
+    <div class="fstats">${ROADMAP.map(s => `<span><b>${n(s.key)}</b> ${s.label.toLowerCase()}</span>`).join("")}</div>
+    ${ROADMAP.map(s => `<div class="fsec"><div class="fsec-h">${chip(s.chip[0], s.chip[1])}<h4>${s.label}</h4><span>${s.items.length} feature(s)</span></div>
+      <p class="intro">${s.intro}</p>
+      ${s.items.map(([t, dsc, where]) => `<div class="fitem ${s.key}"><div class="ic">${icon[s.key]}</div><div><b>${esc(t)}</b>${where ? `<span class="where">${esc(where)}</span>` : ""}<div class="d">${esc(dsc)}</div></div></div>`).join("")}
+    </div>`).join("")}`;
+  $("#featupd").textContent = `Roadmap updated ${ROADMAP_UPDATED}. Priorities may change based on feedback.`;
+}
+const openFeatures = () => { drawFeatures(); $("#featmodal").classList.remove("hidden"); document.body.style.overflow = "hidden"; $("#featclose").focus(); };
+const closeFeatures = () => { $("#featmodal").classList.add("hidden"); document.body.style.overflow = ""; };
+$("#featbtn").onclick = openFeatures;
+$("#featclose").onclick = closeFeatures;
+$("#featok").onclick = closeFeatures;
+$("#featmodal").onclick = e => { if (e.target.id === "featmodal") closeFeatures(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#featmodal").classList.contains("hidden")) closeFeatures(); });
+
+$("#pcount").textContent = loadP().length;
+route();
+const pre = new URLSearchParams(location.search).get("a"); if (pre && VIEW === "check") { $("#q").value = pre; run(pre); }
 </script>
 </body>
 </html>
