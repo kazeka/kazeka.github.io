@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NYC Building Compliance Check</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231e2833'/%3E%3Cpath d='M9 16l5 5 9-10' stroke='%237fb0e0' stroke-width='4' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -66,6 +67,17 @@ tbody tr:hover td{background:#f8fafc}
 .src a{color:var(--muted)}
 footer{background:var(--slate-9);color:#8a98a8;padding:24px 32px;font-size:13px;border-top:3px solid var(--blue)}
 .hidden{display:none}
+#authbox{display:flex;align-items:center;gap:8px;margin-right:8px;font-size:13px;color:#aab6c3}
+#authbox .who{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cloudbar{max-width:1180px;margin:18px auto 0;padding:0 32px}
+.cloudbar>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);padding:10px 14px;font-size:14px;border-radius:var(--r)}
+.cloudbar>div.warn{border-left-color:#c48a2a;background:var(--warnbg)}
+.cloudbar>div.err{border-left-color:var(--bad);background:var(--badbg)}
+.cloudbar .grow{flex:1}
+.field{display:flex;flex-direction:column;gap:6px;margin:14px 0}
+.field label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--slate-6)}
+.field input{font:15px "IBM Plex Sans",sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:var(--r);outline:none}
+.field input:focus{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
 nav .btn.ghostnav{background:transparent;border:1px solid #5a6b7c;padding:7px 16px;font-size:13px;margin-right:8px}
 nav .btn.ghostnav:hover{background:var(--slate-8);border-color:#8a9aab}
 .modal-bg{position:fixed;inset:0;background:rgba(20,28,38,.55);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:48px 20px;overflow:auto}
@@ -141,7 +153,7 @@ select{font:14px "IBM Plex Sans",sans-serif;padding:7px 10px;border:1px solid va
   <a class="nl" href="#/check" data-v="check">Building check</a>
   <a class="nl" href="#/portfolio" data-v="portfolio">Portfolio<span class="badge" id="pcount">0</span></a>
   <a class="nl" href="#/calendar" data-v="calendar">Calendar</a>
-  <div class="sp"></div><button class="btn ghostnav" id="featbtn" type="button">Features</button><a class="btn" href="#" onclick="window.print();return false">Print</a></nav>
+  <div class="sp"></div><span id="authbox"></span><button class="btn ghostnav" id="featbtn" type="button">Features</button><a class="btn" href="#" onclick="window.print();return false">Print</a></nav>
 
 <div class="modal-bg hidden" id="featmodal" role="dialog" aria-modal="true" aria-labelledby="feattitle">
   <div class="modal">
@@ -183,6 +195,7 @@ select{font:14px "IBM Plex Sans",sans-serif;padding:7px 10px;border:1px solid va
     <button class="btn sm danger" id="pclear">Clear portfolio</button>
   </div>
 </section>
+<div id="cloudbar" class="cloudbar hidden"></div>
 <main id="pout"></main>
 </div>
 
@@ -615,9 +628,11 @@ async function run(addr) {
    PORTFOLIO + CALENDAR (stored in localStorage)
    ===================================================================== */
 let CURRENT = null;
-const LS = "nyccc.portfolio.v1";
+const LS_LOCAL = "nyccc.portfolio.v1";      // signed-out portfolio (this browser only)
+let LS = LS_LOCAL;                             // switched to an org cache by src/cloud.js when signed in
 const loadP = () => { try { return JSON.parse(localStorage.getItem(LS)) || []; } catch { return []; } };
-const saveP = list => { localStorage.setItem(LS, JSON.stringify(list)); $("#pcount").textContent = list.length; };
+const saveP = list => { localStorage.setItem(LS, JSON.stringify(list)); $("#pcount").textContent = list.length; window.CCCloud?.changed(); };
+const removedP = bins => window.CCCloud?.removed(bins);
 const inPortfolio = bin => loadP().some(b => b.bin === bin);
 const shortLabel = g => g.label.split(",")[0];
 
@@ -721,7 +736,7 @@ function drawPortfolio() {
 
   document.querySelectorAll("#pout th.sort").forEach(t => t.onclick = () => { PSORT = { k: t.dataset.k, dir: PSORT.k === t.dataset.k ? -PSORT.dir : (t.dataset.k === "name" || t.dataset.k === "next" ? 1 : -1) }; drawPortfolio(); });
   document.querySelectorAll("[data-open]").forEach(a => a.onclick = () => { $("#q").value = a.dataset.open; location.hash = "#/check"; run(a.dataset.open); });
-  document.querySelectorAll("[data-del]").forEach(x => x.onclick = () => { if (confirm("Remove this building from the portfolio?")) { saveP(loadP().filter(b => b.bin !== x.dataset.del)); drawPortfolio(); } });
+  document.querySelectorAll("[data-del]").forEach(x => x.onclick = () => { if (confirm("Remove this building from the portfolio?")) { removedP([x.dataset.del]); saveP(loadP().filter(b => b.bin !== x.dataset.del)); drawPortfolio(); } });
   document.querySelectorAll("[data-ren]").forEach(x => x.onclick = () => { const list = loadP(), b = list.find(b => b.bin === x.dataset.ren);
     const n = prompt("Building name", b.name || b.label); if (n != null) { b.name = n.trim(); saveP(list); drawPortfolio(); } });
   document.querySelectorAll("[data-ref]").forEach(x => x.onclick = () => { const b = loadP().find(b => b.bin === x.dataset.ref); refreshMany([b]); });
@@ -887,11 +902,11 @@ $("#prefresh").onclick = () => { const l = loadP(); if (l.length) refreshMany(l)
 $("#pexport").onclick = () => loadP().length && exportCSV();
 $("#pics").onclick = () => downloadICS(allEvents(), `portfolio-deadlines-${iso(TODAY)}.ics`);
 $("#cics").onclick = () => downloadICS(filteredEvents(), `compliance-calendar-${iso(TODAY)}.ics`);
-$("#pclear").onclick = () => { if (confirm("Remove all buildings from the portfolio?")) { saveP([]); drawPortfolio(); } };
+$("#pclear").onclick = () => { if (confirm("Remove all buildings from the portfolio?")) { removedP(loadP().map(b => b.bin)); saveP([]); drawPortfolio(); } };
 
 
 /* ---------- Features / roadmap modal (plain-language version of FEATURE-RESEARCH.md) ---------- */
-const ROADMAP_UPDATED = "October 2026";
+const ROADMAP_UPDATED = "October 7, 2026";
 const ROADMAP = [
   { key: "done", label: "Available now", chip: ["ok", "Live"], intro: "Ready to use today. No sign-up needed; data comes live from NYC Open Data.",
     items: [
@@ -908,22 +923,29 @@ const ROADMAP = [
       ["Calendar & spreadsheet export", "Send deadlines to Outlook or Google Calendar with 30-day and 7-day reminders, and export your portfolio to CSV.", "Portfolio · Calendar"],
       ["Printable reports", "Print a clean report for any building, without the menus.", "Print"],
     ] },
-  { key: "prog", label: "In progress", chip: ["info", "Next"], intro: "What we're building now: automatic monitoring, so you hear about problems without checking manually.",
+  { key: "prog", label: "Up next", chip: ["info", "Next"], intro: "Being built next: your own account and automatic monitoring, so problems reach you without manual checks.",
     items: [
+      ["Accounts & shared team portfolio", "Sign in and keep your portfolio online, shared with your team on any computer."],
       ["Automatic nightly checks", "Every building in your portfolio is re-checked overnight, and anything new is flagged."],
-      ["Email, Slack & text alerts", "Get told right away about new violations, complaints, hearings or facade status changes."],
-      ["Alerts sent to the right person", "Send each type to the right person: building issues to the super, fines to legal, energy to sustainability. Urgent items go out immediately."],
-      ["311 early warning", "See tenant and neighbor 311 complaints before they turn into violations."],
-      ["Shared team portfolio", "Your portfolio saved online so the whole team sees the same buildings on any computer."],
+      ["Email alerts", "Emails for new violations, complaints, hearings and facade status changes, plus reminders 30 and 7 days before deadlines."],
+      ["Paid but not fixed", "Flags violations where the fine was paid but the city still lists them as open, because no correction was certified."],
+      ["Total penalty exposure", "One dollar figure per building and across the portfolio for everything overdue or missing."],
+      ["Professional rule review", "A licensed professional reviews the deadline rules for lead, asbestos, allergens and gas piping."],
     ] },
-  { key: "plan", label: "Planned", chip: ["na", "Later"], intro: "Larger features for property management teams, being prioritized based on feedback.",
+  { key: "plan", label: "Planned", chip: ["na", "Later"], intro: "Larger features, in rough priority order and shaped by pilot feedback.",
     items: [
-      ["Carbon penalty estimator (LL97)", "Estimate yearly emissions fines now and under the stricter 2030 limits, so you can plan upgrades."],
-      ["Tasks & work orders", "Turn any violation or deadline into an assigned task with a due date, vendor, status and notes."],
+      ["Missing filing detector", "Checks each required annual filing (boilers, bedbugs, water tanks and more) against city records and flags missing years."],
+      ["HPD enforcement risk", "Flags false certifications, no-access inspections and past or likely HPD Alternative Enforcement Program status."],
+      ["Due-diligence report", "A one-time PDF for any address, for buyers, brokers, lenders and attorneys: violations, fines, missing filings and environmental flags."],
+      ["Environmental & health module", "Public asbestos, lead, mold, water tank, pest and site-contamination records alongside your own reports."],
+      ["Apartment-level lead tracking", "Annual notices, units with young children, inspections, turnovers and XRF results, kept as a 10-year record."],
+      ["Super's mobile checklist", "Annual lead and allergen unit inspections on a phone, with photos, timestamps and tenant signatures."],
       ["Document vault", "Store inspection reports, certificates and filing receipts per building, with expiry tracking."],
-      ["Vendor directory", "Keep your inspectors and contractors on file per building, and notify them when a filing window opens."],
-      ["Owner & board reports", "Monthly PDF summaries per building or portfolio: what's new, what's closed and what's due in the next 90 days."],
-      ["Violation explainer", "Plain-English meaning of each violation code, how to fix it and how to certify the correction."],
+      ["Pre-renovation check", "Before filing a DOB job, see which asbestos, lead, mold and site rules apply."],
+      ["Tasks & work orders", "Turn any violation or deadline into an assigned task with a due date, vendor and status."],
+      ["Partner access", "Managing agents, expeditors and architects can give their clients branded access."],
+      ["Owner & board reports", "Monthly PDF summaries: what's new, what's closed and what's due in the next 90 days."],
+      ["Carbon penalty estimator (LL97)", "Estimate yearly emissions fines now and under the stricter 2030 limits."],
       ["Property software integrations", "Sync buildings with Yardi, AppFolio or MRI, plus single sign-on for larger teams."],
     ] },
 ];
@@ -951,5 +973,6 @@ $("#pcount").textContent = loadP().length;
 route();
 const pre = new URLSearchParams(location.search).get("a"); if (pre && VIEW === "check") { $("#q").value = pre; run(pre); }
 </script>
+<script type="module" src="src/cloud.js"></script>
 </body>
 </html>
